@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Vehiculo from './Vehiculo'
 import Contrato from './Contrato'
+import Lote from './Lote'
 
 export default class Ruta extends BaseModel {
   @column({ isPrimary: true })

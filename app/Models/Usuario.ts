@@ -17,7 +17,7 @@ export default class Usuario extends BaseModel {
   @hasMany(() => Administrador, {
     foreignKey: 'user_id',
   })
-  public administrador: HasMany<typeof Administrador>´
+  public administrador: HasMany<typeof Administrador>
 
   @hasOne(() => Dueno, {
     foreignKey: 'user_id',
