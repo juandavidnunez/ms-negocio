@@ -33,6 +33,15 @@ import './routes/direccion'
 import './routes/hoteles'
 import './routes/restaurantes'
 
+import './routes/categorias'
+import './routes/categoriasproductos'
+import './routes/empresas'
+import './routes/lotes'
+import './routes/personasnaturales'
+import './routes/productos'
+import './routes/rutasdirecciones'
+import './routes/vehiculosmunicipio'
+
 
 
 
