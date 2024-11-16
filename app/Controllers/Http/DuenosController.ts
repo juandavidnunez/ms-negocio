@@ -1,9 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Ruta from 'App/Models/Ruta';
-import RutaValidator from 'App/Validators/RutaValidator';
 
-export default class RutasController {
+import Ruta from "App/Models/Ruta";
 
+export default class DuenosController {
     public async create({ request }: HttpContextContract) {
         const body = await request.validate(RutaValidator);
         const theRuta = await Ruta.create(body)
@@ -41,5 +40,4 @@ export default class RutasController {
         response.status(204)
         return await theRuta.delete()
     }
-    
 }

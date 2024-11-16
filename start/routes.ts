@@ -32,6 +32,7 @@ import './routes/centrosdistribucion'
 import './routes/direccion'
 import './routes/hoteles'
 import './routes/restaurantes'
+import './routes/rutas'
 
 
 

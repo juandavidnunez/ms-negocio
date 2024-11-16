@@ -18,20 +18,5 @@ export default class Contrato extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(()=> Cliente,{
-    foreignKey: 'cliente_id',
-  })
-  public cliente BelongsTo<typeof Cliente>
-
-  @hasMany(()=> Cuota, {
-    foreignKey: 'contrato_id',
-  })
-  public cuotas: HasMany<typeof Cuota>
-
-  @hasMany(()=> Ruta, {
-    foreignKey: 'contrato_id',
-  })
-  public rutas: HasMany<typeof Ruta>
-
 
 }

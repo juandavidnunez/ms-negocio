@@ -3,7 +3,7 @@ import { BaseModel, HasMany, HasOne, column, hasMany, hasOne} from '@ioc:Adonis/
 import Administrador from './Administrador'
 import Dueno from './Dueno'
 import Conductor from './Conductor'
-import Personas_natural from './Personas_natural'
+import Personas_natural from './PersonaNatural'
 
 export default class Usuario extends BaseModel {
   
