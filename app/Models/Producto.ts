@@ -18,6 +18,9 @@ export default class Producto extends BaseModel {
   @column()
   public lote_id: number
 
+  @column()
+  public cliente_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

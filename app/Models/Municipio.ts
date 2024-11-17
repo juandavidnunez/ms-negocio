@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Departamento from './Departamento'
 import CentrosDistribucion from './CentrosDistribucion'
+import Vehiculo from './Vehiculo'
 
 export default class Municipio extends BaseModel {
   public static table = 'municipios'
@@ -30,12 +31,11 @@ export default class Municipio extends BaseModel {
   })
   public sedes: HasMany<typeof CentrosDistribucion>
 
-  // @manyToMany(() => Vehiculo, {
-  //   pivotTable: 'vehiculos_municipios',
-  //   pivotForeignKey: 'municipio_id',
-  //   pivotRelatedForeignKey: 'vehiculo_id',
-  //   pivotColumns: []
-  // })
-  // public vehiculos: ManyToMany<typeof Vehiculo>
+  @manyToMany(() => Vehiculo, {
+    pivotTable: 'vehiculos_municipios',
+    pivotForeignKey: 'municipio_id',
+    pivotRelatedForeignKey: 'vehiculo_id',
+    pivotColumns: []
+  })
+  public vehiculos: ManyToMany<typeof Vehiculo>
 }
-
