@@ -11,7 +11,7 @@ export default class Administrador extends BaseModel {
 
 
   @belongsTo(() => Usuario, {
-    foreignKey: 'Administrador_id',
+    foreignKey: 'user_id',
   })
   public usuario: BelongsTo<typeof Usuario>
 

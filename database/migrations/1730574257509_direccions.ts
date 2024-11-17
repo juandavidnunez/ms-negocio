@@ -10,11 +10,7 @@ export default class extends BaseSchema {
       table.integer('centros_distribucions_id')
         .unsigned()
         .references('centros_distribucions.id')
-        .onDelete('CASCADE')
 
-      /**
-       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
-       */
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

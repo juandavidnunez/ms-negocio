@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import CentrosDistribucion from './CentrosDistribucion'
 
 export default class Direccion extends BaseModel {
@@ -21,4 +21,11 @@ export default class Direccion extends BaseModel {
     foreignKey: 'centros_distribucions_id',
   })
   public CentrosDistribucion: BelongsTo<typeof CentrosDistribucion>
+
+  @manyToMany(() => Direccion, {
+    pivotTable: 'rutas_direcciones',
+    pivotForeignKey: 'direccion_id',
+    pivotRelatedForeignKey: 'ruta_id',
+  })
+  public direcciones: ManyToMany<typeof Direccion>
 }
