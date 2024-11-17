@@ -8,7 +8,7 @@ export default class AdministradorsController {
   private apiUrl: string;
 
   constructor() {
-    this.apiUrl = 'http://localhost:8181/api';
+    this.apiUrl = 'http://localhost:8080/api';
   }
 
 
