@@ -5,6 +5,12 @@ export default class VehiculoMunicipio extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public vehiculo_id: number
+
+  @column()
+  public municipio_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

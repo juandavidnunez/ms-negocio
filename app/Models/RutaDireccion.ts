@@ -6,6 +6,12 @@ export default class RutaDireccion extends BaseModel {
   public id: number
 
   @column()
+  public direccion_id: number
+
+  // @column()
+  // public ruta_id: number
+
+  @column()
   public lote_id: number
   
   @column.dateTime({ autoCreate: true })
