@@ -9,7 +9,7 @@ export default class ServiciosController {
     const body = await request.validate(servicioValidation);
     const theServicio: Servicio = await Servicio.create(body);
     return theServicio;
-    }
+  }
 
   // Get all servicios
   public async findAll({ request }: HttpContextContract) {

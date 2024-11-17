@@ -31,8 +31,6 @@ export default class CentrosDistribucionsController {
     const body = await request.validate(CentrosDistribucionValidation);
     const theCentrosDistribucion = await CentrosDistribucion.findOrFail(params.id)
     theCentrosDistribucion.nombre = body.nombre
-
-
     return theCentrosDistribucion.save()
   }
 
