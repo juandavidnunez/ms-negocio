@@ -9,7 +9,9 @@ export default class extends BaseSchema {
       table.string('nombre', 30).notNullable()
       table.string('apellido', 30).notNullable()
       table.string('cedula', 20).notNullable()
-      table.string('empresa_id').unsigned().references('empresas.id')
+      // foreign key
+      table.integer('empresa_id').unsigned().references('empresas.id')
+      table.integer('cliente_id').unsigned().references('clientes.id')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
