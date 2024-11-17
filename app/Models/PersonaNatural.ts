@@ -5,18 +5,6 @@ export default class PersonaNatural extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
-  public nombre: string
-
-  @column()
-  public apellido: string
-
-  @column()
-  public cedula: string
-
-  @column()
-  public empresa_id: number
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
