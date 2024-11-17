@@ -61,6 +61,7 @@
     "ace": "^1.3.0",
     "axios": "^1.6.8",
     "luxon": "^3.4.4",
+    "ms-negocio": "file:",
     "mysql2": "^3.9.2",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.2.1",
