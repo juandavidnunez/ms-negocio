@@ -10,7 +10,7 @@ export default class Administrador extends BaseModel {
   public nombre: string
 
   @column()
-  public fecha_nacimiento: Date
+  public fecha_nacimiento: DateTime
 
   @column({isPrimary: true})
   public cedula: string

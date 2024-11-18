@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Seguro from 'App/Models/Seguro';
+import SeguroValidator from 'App/Validators/SeguroValidator';
 
 export default class SegurosController {
     public async create({ request }: HttpContextContract) {

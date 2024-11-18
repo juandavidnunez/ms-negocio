@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Turno from "App/Models/Turno";
+import TurnoValidator from 'App/Validators/TurnoValidator';
 
 export default class TurnosController {
     public async create({ request }: HttpContextContract) {

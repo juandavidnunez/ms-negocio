@@ -6,7 +6,13 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      
+      table.string('nombre')
+      table.date('fecha_nacimiento')
+      table.string('cedula').unique()
+
       table.integer('user_id').unsigned().references('usuarios.id')
+
 
 
       /**

@@ -6,7 +6,9 @@ export default class ClienteValidator {
 
   public schema = schema.create({
     nombre: schema.string.optional(),
-    fecha_nacimiento: schema.string.optional(),
+    fecha_nacimiento: schema.date.optional({
+      format: 'yyyy-MM-dd'
+    }),
     cedula: schema.number.optional(),
     user_id: schema.number([
       rules.required(),
