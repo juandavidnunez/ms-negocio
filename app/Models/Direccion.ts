@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasOne, HasOne, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import CentrosDistribucion from './CentrosDistribucion'
 
 export default class Direccion extends BaseModel {
@@ -8,19 +8,16 @@ export default class Direccion extends BaseModel {
   @column()
   public direccion : string
 
-  @column()
-  centros_distribucions_id :number
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => CentrosDistribucion, {
+  @hasOne(() => CentrosDistribucion, {
     foreignKey: 'centros_distribucions_id',
   })
-  public CentrosDistribucion: BelongsTo<typeof CentrosDistribucion>
+  public CentrosDistribucion: HasOne<typeof CentrosDistribucion>
 
   @manyToMany(() => Direccion, {
     pivotTable: 'rutas_direcciones',
