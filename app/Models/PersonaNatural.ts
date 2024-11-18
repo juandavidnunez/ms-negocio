@@ -1,9 +1,27 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Usuario from './Usuario'
 
 export default class PersonaNatural extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+  public nombre: string
+
+  @column()
+  public fecha_nacimiento: Date
+
+  @column({isPrimary: true})
+  public cedula: string
+
+  @column()
+  public user_id: number // Id for the user in users
+
+  @belongsTo(() => Usuario, {
+    foreignKey: 'user_id',
+  })
+  public usuario: BelongsTo<typeof Usuario>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

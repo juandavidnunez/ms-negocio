@@ -32,7 +32,7 @@ export default class Usuario extends BaseModel {
   @hasOne(() => Personas_natural, {
     foreignKey: 'user_id',
   })
-  public personas_natural: HasOne<typeof Personas_natural>
+  public persona_natural: HasOne<typeof Personas_natural>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

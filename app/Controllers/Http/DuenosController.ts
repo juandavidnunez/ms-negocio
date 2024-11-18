@@ -1,10 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Ruta from "App/Models/Ruta";
+import DuenoValidator from 'App/Validators/DuenoValidator';
 
 export default class DuenosController {
     public async create({ request }: HttpContextContract) {
-        const body = await request.validate(RutaValidator);
+        const body = await request.validate(DuenoValidator);
         const theRuta = await Ruta.create(body)
         return theRuta
     }
@@ -25,7 +26,7 @@ export default class DuenosController {
     
     public async update({ params, request }: HttpContextContract) {
         // Validar el cuerpo de la solicitud
-        const body = await request.validate(RutaValidator);
+        const body = await request.validate(DuenoValidator);
         // Buscar la ruta por ID
         const theRuta = await Ruta.findOrFail(params.id);
         // Actualizar las propiedades de theRuta con los valores del cuerpo
