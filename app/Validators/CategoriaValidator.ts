@@ -1,14 +1,14 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-export const CentrosDistribucionValidation = {
+export const CategoriaValidation = {
   schema: schema.create({
     nombre: schema.string({}, [
       rules.required(),
-      rules.maxLength(15)
+      rules.maxLength(50)
     ]),
-        municipio_id: schema.number([
+    descripcion: schema.string({}, [
       rules.required(),
-      rules.exists({ table: 'municipios', column: 'id' })
+      rules.maxLength(150)
     ])
   })
 }
