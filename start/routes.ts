@@ -43,6 +43,14 @@ import './routes/productos'
 import './routes/rutasdirecciones'
 import './routes/vehiculosmunicipio'
 
+import './routes/contratos'
+import './routes/conductores'
+import './routes/duenos'
+import './routes/seguros'
+import './routes/vehiculoConductors'
+import './routes/vehiculos'
+import './routes/vehiculoDuenos'
+import './routes/turnos'
 
 
 
