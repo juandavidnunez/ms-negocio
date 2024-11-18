@@ -1,15 +1,18 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import Usuario from './Usuario'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class PersonaNatural extends BaseModel {
+export default class Factura extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public nombre: string
+  public fecha_pago: DateTime
 
   @column()
+  public epayco_info: string
+
+  @column()
+  public success: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

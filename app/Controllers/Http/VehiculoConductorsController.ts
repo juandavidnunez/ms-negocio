@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import VehiculoConductor from "App/Models/VehiculoConductor";
+import VehiculoConductorValidator from 'App/Validators/VehiculoConductorValidator';
 
 export default class VehiculoConductorsController {
     public async create({ request }: HttpContextContract) {

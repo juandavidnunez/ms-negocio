@@ -7,8 +7,16 @@ export default class Administrador extends BaseModel {
   public id: number
 
   @column()
-  public user_id: string
+  public nombre: string
 
+  @column()
+  public fecha_nacimiento: DateTime
+
+  @column({isPrimary: true})
+  public cedula: string
+
+  @column()
+  public user_id: number // Id for the user in users
 
   @belongsTo(() => Usuario, {
     foreignKey: 'user_id',

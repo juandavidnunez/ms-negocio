@@ -11,7 +11,7 @@ export default class Dueno extends BaseModel {
   public nombre: string
 
   @column()
-  public fecha_nacimiento: Date
+  public fecha_nacimiento: DateTime
 
   @column({isPrimary: true})
   public cedula: string

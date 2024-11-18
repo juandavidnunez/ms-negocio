@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.string('nombre')
       table.date('fecha_nacimiento')
-      table.integer('cedula')
+      table.string('cedula')
 
       table.integer('user_id').unsigned().references('usuarios.id')
 

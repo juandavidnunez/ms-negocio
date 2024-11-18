@@ -12,10 +12,10 @@ export default class Conductor extends BaseModel {
   public nombre: string
 
   @column()
-  public fecha_nacimiento: Date
+  public fecha_nacimiento: DateTime
 
   @column()
-  public cedula: number
+  public cedula: string
 
   @column()
   public user_id: number // Id for the user in users

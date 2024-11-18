@@ -7,6 +7,12 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
+      table.string('nombre')
+      table.date('fecha_nacimiento')
+      table.string('cedula').unique()
+
+      table.integer('user_id').unsigned().references('usuarios.id')
+
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
