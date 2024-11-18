@@ -15,6 +15,9 @@ export default class Empresa extends BaseModel {
   @column()
   public contacto: string
 
+  @column()
+  public cliente_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
