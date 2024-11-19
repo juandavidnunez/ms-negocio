@@ -36,12 +36,7 @@ import './routes/rutas'
 import './routes/clientes'
 import './routes/gastos'
 import './routes/cuotas'
-
 import './routes/DirListaOrden'
-
-
-
-
 import './routes/categorias'
 import './routes/categoriasproductos'
 import './routes/empresas'
@@ -50,7 +45,6 @@ import './routes/personasnaturales'
 import './routes/productos'
 import './routes/rutasdirecciones'
 import './routes/vehiculosmunicipio'
-
 import './routes/contratos'
 import './routes/conductores'
 import './routes/duenos'

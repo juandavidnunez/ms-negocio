@@ -3,6 +3,7 @@ import axios from 'axios';
 import env from '@ioc:Adonis/Core/Env'
 export default class Security {
   public async handle({ request, response }: HttpContextContract, next: () => Promise<void>) {
+    // await next()
     let theRequest = request.toJSON()
     console.log(theRequest);
     let token = theRequest.headers.authorization.replace("Bearer ", "")

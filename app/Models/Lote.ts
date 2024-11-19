@@ -1,6 +1,7 @@
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import Ruta from './Ruta'
+import Producto from './Producto'
 
 export default class Lote extends BaseModel {
   @column({ isPrimary: true })
@@ -22,4 +23,9 @@ export default class Lote extends BaseModel {
     foreignKey: 'ruta_id'
   })
   public ruta: BelongsTo<typeof Ruta>
+
+  @hasMany(()=>Producto, {
+    foreignKey: 'lote_id'
+  })
+  public lote: HasMany<typeof Lote>
 }
