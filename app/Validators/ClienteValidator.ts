@@ -9,7 +9,7 @@ export default class ClienteValidator {
     fecha_nacimiento: schema.date.optional({
       format: 'yyyy-MM-dd'
     }),
-    cedula: schema.number.optional(),
+    cedula: schema.string.optional(),
     user_id: schema.number([
       rules.required(),
       rules.exists({table: 'usuarios', column: 'id'})

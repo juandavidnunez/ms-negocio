@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Usuario from 'App/Models/Usuario'
 import axios from 'axios'
 
 export default class UsuariosController {
@@ -18,6 +19,21 @@ export default class UsuariosController {
       console.error('Error al consumir la API de Adonis:', error)
       response.status(error.response?.status || 500).send('Error al consumir la API de Adonis')
     }
+  }
+
+  public async create({ request }: HttpContextContract) {
+
+    let body = request.body()
+      // Hacer una solicitud POST a la API de Adonis
+      const adonisResponse = await axios.post('http://localhost:8080/api/public/security/login', {
+        email: body.email,
+        password: body.password,
+      })
+
+      const tempUser = {"security_id":adonisResponse.data.user._id}
+      console.log(adonisResponse.data)
+      const theUser=Usuario.create(tempUser)
+      return theUser
   }
 
   public async secondAuth({ request, response }: HttpContextContract) {
