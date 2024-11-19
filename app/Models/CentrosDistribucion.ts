@@ -12,6 +12,14 @@ export default class CentrosDistribucion extends BaseModel {
   @column()
   municipio_id:number
 
+  @column()
+  public direccion_id: number
+
+  @belongsTo(() => Direccion, {
+    foreignKey: 'direccion_id'
+  })
+  public direccion: BelongsTo<typeof Direccion>
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

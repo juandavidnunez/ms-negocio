@@ -8,6 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('nombre')
 
+      table.integer('direccion_id').unsigned().references('direccions.id')
+
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
