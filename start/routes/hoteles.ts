@@ -6,4 +6,4 @@ Route.group(() => {
   Route.post('/hoteles', 'HotelsController.create')
   Route.put('/hoteles/:id', 'HotelsController.update')
   Route.delete('/hoteles/:id', 'HotelsController.delete')
-})
+}).middleware(["security"])
