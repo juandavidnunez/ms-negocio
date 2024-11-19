@@ -1,9 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cuota from 'App/Models/Cuota';
+import CuotaValidator from 'App/Validators/CuotaValidator';
 
 export default class CuotasController {
     public async create({ request }: HttpContextContract) {
-        const body = await request.validate(CuotasController);
+        const body = await request.validate(CuotaValidator);
         const theCuota = await Cuota.create(body)
         return theCuota
     }
@@ -24,7 +25,7 @@ export default class CuotasController {
     
     public async update({ params, request }: HttpContextContract) {
         // Validar el cuerpo de la solicitud
-        const body = await request.validate(CuotasController);
+        const body = await request.validate(CuotaValidator);
         // Buscar la Cuota por ID
         const theCuota = await Cuota.findOrFail(params.id);
         // Actualizar las propiedades de theCuota con los valores del cuerpo

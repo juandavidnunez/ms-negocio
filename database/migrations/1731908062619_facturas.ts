@@ -8,8 +8,11 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.dateTime('fecha_pago')
-      table.string('epayco_info')
+      table.integer('valor')
+      table.string('info')
       table.boolean('success')
+
+      table.integer('cuota_id').unsigned().references('cuotas.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

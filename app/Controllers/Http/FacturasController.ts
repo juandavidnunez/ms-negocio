@@ -2,13 +2,53 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Factura from "App/Models/Factura";
 import FacturaValidator from 'App/Validators/FacturaValidator';
+import Env from '@ioc:Adonis/Core/Env'
+import axios from 'axios';
+import Cuota from 'App/Models/Cuota';
 
 export default class FacturasController {
 
-    public async create({ request }: HttpContextContract) {
-        const body = await request.validate(FacturaValidator);
-        const theFactura = await Factura.create(body)
-        return theFactura
+    public async create({ request, response }: HttpContextContract) {
+        try {
+            let body = request.body();
+
+            const pagos_host = Env.get('PAGOS_HOST');
+            // Hacer una solicitud POST a la API de Epyco
+
+            //Quitamos la id de la cuota
+            const cuota_id = body.cuota_id
+            delete body.cuota_id
+
+            // Verificar que el valor de pago es el indicado
+            const theCuota = await Cuota.findOrFail(cuota_id)
+            if(!theCuota){
+                throw new Error("No se encuentra la cuota")
+            }
+            if(theCuota.valor != body.valor){
+                throw new Error("El valor de la cuota no es el mismo a pagar")
+            }
+
+            const adonisResponse = await axios.post(pagos_host, {
+                body
+            });
+        
+            // Crear el objeto factura con los datos necesarios
+            const factura = {
+                "fecha_pago": adonisResponse.data?.data?.fecha || null, // Usar null si no existe
+                "valor": adonisResponse.data?.data?.valor || null, // Usar null si no existe
+                "info": adonisResponse.data || null, // Usar null si no existe
+                "success": adonisResponse.data?.status || false, // Usar false si no existe
+                "cuota_id": cuota_id // Usar null si no existe
+            };
+        
+            // Guardar la factura
+            Factura.create(factura)
+
+        } catch (error) {
+            // Manejar errores
+            console.error('Error al consumir la API de Pagos:', error);
+            response.status(error.response?.status || 500).send('Error al consumir la API de Adonis');
+        }
     }
     
     public async findAll({ request }: HttpContextContract) {
