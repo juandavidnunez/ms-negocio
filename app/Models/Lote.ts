@@ -24,8 +24,9 @@ export default class Lote extends BaseModel {
   })
   public ruta: BelongsTo<typeof Ruta>
 
-  @hasMany(()=>Producto, {
+  @hasMany(()=> Producto, {
     foreignKey: 'lote_id'
   })
-  public lote: HasMany<typeof Lote>
+  public lote: HasMany<typeof Producto>
+
 }

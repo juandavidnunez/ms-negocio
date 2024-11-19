@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('cedula').unique()
 
       table.integer('user_id').unsigned().references('usuarios.id')
+      table.integer('cliente').unsigned().references('clientes.id')
 
 
       table.timestamp('created_at', { useTz: true })
