@@ -4,4 +4,4 @@ Route.group(() => {
   Route.post('/usuarios', 'UsuariosController.login')
   Route.put('/usuarios', 'UsuariosController.secondAuth')
   Route.post('/newUser', 'UsuariosController.create')
-})
+}).middleware(["security"])

@@ -6,4 +6,4 @@ Route.group(() => {
   Route.post('/vehiculoDuenos', 'VehiculoDuenosController.create')
   Route.put('/vehiculoDuenos/:id', 'VehiculoDuenosController.update')
   Route.delete('/vehiculoDuenos/:id', 'VehiculoDuenosController.delete')
-})
+}).middleware(["security"])
