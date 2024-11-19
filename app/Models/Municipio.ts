@@ -3,6 +3,7 @@ import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, ManyToMany, 
 import Departamento from './Departamento'
 import CentrosDistribucion from './CentrosDistribucion'
 import Vehiculo from './Vehiculo'
+import Direccion from './Direccion'
 
 export default class Municipio extends BaseModel {
   public static table = 'municipios'
@@ -31,8 +32,13 @@ export default class Municipio extends BaseModel {
   })
   public sedes: HasMany<typeof CentrosDistribucion>
 
+  @hasMany(() => Direccion, {
+    foreignKey: 'municipio_id',
+  })
+  public direcciones: HasMany<typeof Direccion>
+
   @manyToMany(() => Vehiculo, {
-    pivotTable: 'vehiculos_municipios',
+    pivotTable: 'operaciones',
     pivotForeignKey: 'municipio_id',
     pivotRelatedForeignKey: 'vehiculo_id',
     pivotColumns: []

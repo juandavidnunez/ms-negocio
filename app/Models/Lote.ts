@@ -1,5 +1,6 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import Ruta from './Ruta'
 
 export default class Lote extends BaseModel {
   @column({ isPrimary: true })
@@ -17,4 +18,8 @@ export default class Lote extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @belongsTo(() => Ruta,{
+    foreignKey: 'ruta_id'
+  })
+  public ruta: BelongsTo<typeof Ruta>
 }

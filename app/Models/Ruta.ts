@@ -35,7 +35,6 @@ export default class Ruta extends BaseModel {
   })
   public contrato: BelongsTo<typeof Contrato>
 
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

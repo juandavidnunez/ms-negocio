@@ -6,6 +6,7 @@ import Municipio from './Municipio'
 export default class CentrosDistribucion extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+  
   @column()
   public nombre: string
   
@@ -30,7 +31,6 @@ export default class CentrosDistribucion extends BaseModel {
     foreignKey: 'municipio_id',
   })
   public municipio: BelongsTo<typeof Municipio>
-
   
   @hasMany(() => Direccion, {
     foreignKey: 'centros_distribucions_id',

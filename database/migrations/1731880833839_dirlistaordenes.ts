@@ -9,7 +9,6 @@ export default class extends BaseSchema {
 
       table.integer('direccion_id').unsigned().references('direccions.id')
       table.integer('ruta_id').unsigned().references('rutas.id')
-      table.integer('lote_id').unsigned().references('lotes.id')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
