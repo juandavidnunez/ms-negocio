@@ -33,6 +33,14 @@ import './routes/direccion'
 import './routes/hoteles'
 import './routes/restaurantes'
 import './routes/rutas'
+import './routes/clientes'
+import './routes/gastos'
+import './routes/cuotas'
+
+import './routes/DirListaOrden'
+
+
+
 
 import './routes/categorias'
 import './routes/categoriasproductos'
