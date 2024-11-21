@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Categoria from './Categoria'
+import Lote from './Lote'
+import Cliente from './Cliente'
 
 export default class Producto extends BaseModel {
   @column({ isPrimary: true })
@@ -34,4 +36,14 @@ export default class Producto extends BaseModel {
     pivotColumns: ['cantidad']
   })
   public categorias: ManyToMany<typeof Categoria>
+
+  @belongsTo(() => Lote,{
+    foreignKey: 'lote_id'
+  })
+  public lote: BelongsTo<typeof Lote>
+
+  @belongsTo(() => Cliente,{
+    foreignKey: 'cliente_id'
+  })
+  public cliente: BelongsTo<typeof Cliente>
 }

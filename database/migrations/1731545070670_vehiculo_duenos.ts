@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.integer('vehiculo_id').unsigned().references('vehiculos.id')
-      table.integer('dueño_id').unsigned().references('duenos.id')
+      table.integer('dueno_id').unsigned().references('duenos.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

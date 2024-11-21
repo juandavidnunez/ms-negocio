@@ -9,12 +9,9 @@ export default class CentrosDistribucion extends BaseModel {
   
   @column()
   public nombre: string
-  
-  @column()
-  municipio_id:number
 
   @column()
-  public direccion_id: number
+  public municipio_id: number
 
   @belongsTo(() => Direccion, {
     foreignKey: 'direccion_id'
@@ -31,9 +28,4 @@ export default class CentrosDistribucion extends BaseModel {
     foreignKey: 'municipio_id',
   })
   public municipio: BelongsTo<typeof Municipio>
-  
-  @hasMany(() => Direccion, {
-    foreignKey: 'centros_distribucions_id',
-   })
-   public Direcciones: HasMany<typeof Direccion>
 }

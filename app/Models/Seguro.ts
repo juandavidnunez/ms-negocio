@@ -7,14 +7,14 @@ export default class Seguro extends BaseModel {
   public id: number
 
   @column()
-  public vehiculo_id: number
-
-  @column()
   public fecha_inicio: DateTime
 
   @column()
   public fecha_vencimiento: DateTime
 
+  @column()
+  public vehiculo_id: number
+  
   @belongsTo(() => Vehiculo, {
     foreignKey: 'vehiculo_id'
   })

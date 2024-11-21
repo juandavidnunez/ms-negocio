@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Empresa from './Empresa'
+import Cliente from './Cliente'
 import Usuario from './Usuario'
 
 export default class PersonaNatural extends BaseModel {
@@ -7,19 +9,26 @@ export default class PersonaNatural extends BaseModel {
   public id: number
 
   @column()
-  public nombre: string
+  public cliente_id: number
 
   @column()
-  public fecha_nacimiento: DateTime
-
-  @column({isPrimary: true})
-  public cedula: string
+  public empresa_id: number
 
   @column()
-  public user_id: number // Id for the user in users
+  public usuario_id: number
+
+  @belongsTo(() => Empresa,{
+    foreignKey: 'empresa_id'
+  })
+  public empresa: BelongsTo<typeof Empresa>
+
+  @belongsTo(() => Cliente, {
+    foreignKey: 'cliente_id'
+  })
+  public cliente: BelongsTo<typeof Cliente>
 
   @belongsTo(() => Usuario, {
-    foreignKey: 'user_id',
+    foreignKey: 'usuario_id'
   })
   public usuario: BelongsTo<typeof Usuario>
 

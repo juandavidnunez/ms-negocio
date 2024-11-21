@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.integer('orden').notNullable()
+      table.integer('orden').notNullable() //Orden en que se va a realizar la entrega
       table.integer('direccion_id').unsigned().references('direccions.id')
       table.integer('ruta_id').unsigned().references('rutas.id')
 

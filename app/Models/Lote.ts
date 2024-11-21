@@ -1,6 +1,8 @@
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import Ruta from './Ruta'
+import DirListaOrden from './DirListaOrden'
+import Producto from './Producto'
 
 export default class Lote extends BaseModel {
   @column({ isPrimary: true })
@@ -22,4 +24,14 @@ export default class Lote extends BaseModel {
     foreignKey: 'ruta_id'
   })
   public ruta: BelongsTo<typeof Ruta>
+
+  @belongsTo(() => DirListaOrden,{
+    foreignKey: 'dir_lista_orden_id'
+  })
+  public dirListaOrden: BelongsTo<typeof DirListaOrden>
+
+  @hasMany(() => Producto,{
+    foreignKey: 'lote_id'
+  })
+  public productos: HasMany<typeof Producto>
 }

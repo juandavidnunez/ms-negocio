@@ -6,6 +6,9 @@ import VehiculoConductor from './VehiculoConductor'
 import Ruta from './Ruta'
 import Operacion from './Operacion'
 import Municipio from './Municipio'
+import Dueno from './Dueno'
+import Conductor from './Conductor'
+import Contrato from './Contrato'
 
 export default class Vehiculo extends BaseModel {
   @column({ isPrimary: true })
@@ -53,6 +56,30 @@ export default class Vehiculo extends BaseModel {
     pivotColumns: []
   })
   public municipios: ManyToMany<typeof Municipio>
+
+  @manyToMany(() => Dueno,{
+    pivotTable: 'vehiculo_duenos',
+    pivotForeignKey: 'vehiculo_id',
+    pivotRelatedForeignKey: 'dueno_id',
+    pivotColumns: []
+  })
+  public duenos: ManyToMany<typeof Dueno>
+
+  @manyToMany(() => Conductor, {
+    pivotTable: 'vehiculo_conductors',
+    pivotForeignKey: 'vehiculo_id',
+    pivotRelatedForeignKey: 'conductor_id',
+    pivotColumns: []
+  })
+  public conductores: ManyToMany<typeof Conductor>
+
+  @manyToMany(() => Contrato,{
+    pivotTable: 'rutas',
+    pivotForeignKey: 'vehiculo_id',
+    pivotRelatedForeignKey: 'contrato_id',
+    pivotColumns: []
+  })
+  public contratos: ManyToMany<typeof Contrato>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
