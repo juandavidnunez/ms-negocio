@@ -12,6 +12,9 @@ export default class Cliente extends BaseModel {
   @column()
   public fecha_nacimiento: DateTime
 
+  @column()
+  public email: string
+
   @column({isPrimary: true})
   public cedula: string
 
