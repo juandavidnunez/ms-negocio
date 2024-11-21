@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Lote from './Lote'
+import Ruta from './Ruta'
+import Direccion from './Direccion'
 import Anotacion from './Anotacion'
 
 export default class DirListaOrden extends BaseModel {
@@ -15,6 +17,16 @@ export default class DirListaOrden extends BaseModel {
 
   @column()
   public ruta_id:number
+
+  @belongsTo(() => Ruta, {
+    foreignKey: 'ruta_id',
+  })
+  public ruta: BelongsTo<typeof Ruta>
+
+  @belongsTo(() => Direccion, {
+    foreignKey: 'direccion_id',
+  })
+  public direccion: BelongsTo<typeof Direccion>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
