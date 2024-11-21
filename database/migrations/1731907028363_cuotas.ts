@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.integer('valor')
       table.boolean('estado')
-      table.integer('contrato_id').unsigned().references('contratos.id')
+      table.integer('contrato_id').unsigned().references('contratoes.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

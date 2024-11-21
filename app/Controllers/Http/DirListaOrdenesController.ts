@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import DirListaOrden from 'App/Models/DirListaOrden'
+import DirListaOrden from 'App/Models/DirListaOrden';
 
 export default class DirListaOrdenesController {
     public async create({ request }: HttpContextContract) {
-        const body = request
+        const body = await request.body()
         const theDirListaOrden = await DirListaOrden.create(body)
         return theDirListaOrden
     }
@@ -24,7 +24,7 @@ export default class DirListaOrdenesController {
     
     public async update({ params, request }: HttpContextContract) {
         // Validar el cuerpo de la solicitud
-        const body = request
+        const body = await request.body()
         // Buscar la DirListaOrden por ID
         const theDirListaOrden = await DirListaOrden.findOrFail(params.id);
         // Actualizar las propiedades de theDirListaOrden con los valores del cuerpo

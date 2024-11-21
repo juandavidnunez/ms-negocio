@@ -8,7 +8,7 @@ export default class ContratoValidator {
     cliente_id: schema.number([
       rules.exists({table: 'clientes', column: 'id'})
     ]),
-    fecha_creacion: schema.date({
+    fecha_creacion: schema.date.optional({
       format: 'sql'
     })
   })
