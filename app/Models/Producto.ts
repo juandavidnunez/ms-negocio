@@ -37,14 +37,13 @@ export default class Producto extends BaseModel {
   })
   public categorias: ManyToMany<typeof Categoria>
 
-  @belongsTo(()=> Lote, {
+  @belongsTo(() => Lote,{
     foreignKey: 'lote_id'
   })
   public lote: BelongsTo<typeof Lote>
 
-  @belongsTo(()=> Cliente, {
-    foreignKey: 'Cliente_id'
+  @belongsTo(() => Cliente,{
+    foreignKey: 'cliente_id'
   })
   public cliente: BelongsTo<typeof Cliente>
-
 }

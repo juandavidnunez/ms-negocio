@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('direccion').notNullable()
       table.integer('municipio_id').unsigned().references('municipios.id')
+      table.integer('centros_distribucion_id').unsigned().references('centros_distribucions.id')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

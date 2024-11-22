@@ -11,7 +11,7 @@ export default class VehiculoDueno extends BaseModel {
   public vehiculo_id: number
 
   @column()
-  public dueño_id: number
+  public dueno_id: number
 
   @belongsTo(() => Vehiculo, {
     foreignKey: 'vehiculo_id'
@@ -19,7 +19,7 @@ export default class VehiculoDueno extends BaseModel {
   public vehiculo: BelongsTo<typeof Vehiculo>
 
   @belongsTo(() => Dueno, {
-    foreignKey: 'dueño_id'
+    foreignKey: 'dueno_id'
   })
   public dueño: BelongsTo<typeof Dueno>
 

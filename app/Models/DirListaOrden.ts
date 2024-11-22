@@ -1,19 +1,22 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Lote from './Lote'
 import Ruta from './Ruta'
 import Direccion from './Direccion'
+import Anotacion from './Anotacion'
 
 export default class DirListaOrden extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public direccion_id: number // Fecha y descripción, hacerle creación y eliminación, cuando se cree la anotación, mandar un correo electrónico al cliente y al dueño del vehiculo
+  public orden: number
 
   @column()
-  public ruta_id: number
+  public direccion_id: number
 
+  @column()
+  public ruta_id:number
 
   @belongsTo(() => Ruta, {
     foreignKey: 'ruta_id',
@@ -24,8 +27,6 @@ export default class DirListaOrden extends BaseModel {
     foreignKey: 'direccion_id',
   })
   public direccion: BelongsTo<typeof Direccion>
-
-
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -38,4 +39,8 @@ export default class DirListaOrden extends BaseModel {
   })
   public lote: HasOne<typeof Lote>
 
+  @hasMany(() => Anotacion, {
+    foreignKey: 'dir_lista_orden_id'
+  })
+  public anotaciones: HasMany<typeof Anotacion>
 }

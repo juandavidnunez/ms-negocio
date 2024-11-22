@@ -5,11 +5,11 @@ import { MunicipioValidation } from 'App/Validators/MunicipioValidator';
 
 export default class MunicipiosController {
 
-    public async create({ request }: HttpContextContract) {
+  public async create({ request }: HttpContextContract) {
     const body = await request.validate(MunicipioValidation);
     const theMunicipio = await Municipio.create(body)
     return theMunicipio
-}
+  }
 
   public async findAll({ request }: HttpContextContract) {
     const page = request.input('page', 1)
