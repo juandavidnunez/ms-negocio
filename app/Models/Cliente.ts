@@ -10,6 +10,12 @@ export default class Cliente extends BaseModel {
   public id: number
 
   @column()
+  public nombre: string
+
+  @column()
+  public cedula: string
+
+  @column()
   public security_id: string // Id for the user in users
 
   @hasMany(()=>Producto,{

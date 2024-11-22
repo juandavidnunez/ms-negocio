@@ -7,46 +7,39 @@ export default class ServiciosController {
 
   public async create({ request }: HttpContextContract) {
     const body = await request.validate(servicioValidation);
-    const theServicio: Servicio = await Servicio.create(body);
-    return theServicio;
-  }
-
-  // Get all servicios
-  public async findAll({ request }: HttpContextContract) {
-    const page = request.input('page', 1)
-    const perPage = request.input('perPage', 20)
-    let servicio: Servicio[] = await Servicio.query().paginate(page, perPage)
-    return servicio
-  }
-  public async show({ params }: HttpContextContract) {
-    return Servicio.query()
-      .where("id", params.id)
-      .preload('restaurante')
-      .preload('hotel');
-  }
-  
-  // Get a servio by id
-
-  public async findById({ params }: HttpContextContract) {
-    const theServicio = await Servicio.findOrFail(params.id)
+    const theServicio = await Servicio.create(body)
     return theServicio
-  }
-
-  // Update a servicios by id
-
-  public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(servicioValidation);
-    const theServicio = await Servicio.findOrFail(params.id)
-    theServicio.descripcion = body.descripcion ?? theServicio.descripcion
-    theServicio.estado_servicio = body.estado_servicio
-    return theServicio.save()
 }
 
-  // Delete a servicios by id
+public async findAll({ request }: HttpContextContract) {
+    const page = request.input('page', 1)
+    const perPage = request.input('perPage', 20)
+    let Servicios: Servicio[] = await Servicio.query().paginate(page, perPage)
+    return Servicios
+}
+
+
+public async findById({ params }: HttpContextContract) {
+    const theServicio = await Servicio.findOrFail(params.id)
+    return theServicio
+}
+
+
+public async update({ params, request }: HttpContextContract) {
+    // Validar el cuerpo de la solicitud
+    const body = await request.validate(servicioValidation);
+    // Buscar la Servicio por ID
+    const theServicio = await Servicio.findOrFail(params.id);
+    // Actualizar las propiedades de theServicio con los valores del cuerpo
+    Object.assign(theServicio, body);
+    
+    await theServicio.save();
+    return theServicio;
+}
 
   public async delete({ params, response }: HttpContextContract) {
     const theServicio = await Servicio.findOrFail(params.id)
     response.status(204)
     return await theServicio.delete()
-  }
+}
 }
