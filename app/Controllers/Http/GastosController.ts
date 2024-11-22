@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Gasto from 'App/Models/Gasto';
 import { GastoValidation } from 'App/Validators/GastoValidator';
-import { hotelValidation } from 'App/Validators/HotelValidator';
 
 export default class GastosController {
 
