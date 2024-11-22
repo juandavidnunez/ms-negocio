@@ -24,14 +24,18 @@ export default class RestaurantesController {
   }
 
 
-  public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(restauranteValidation);
-    const theRestaurante = await Restaurante.findOrFail(params.id)
-    theRestaurante.nombre = body.nombre
-    theRestaurante.descripcion = body.descripcion
-    return theRestaurante.save()
-  }
 
+  public async update({ params, request }: HttpContextContract) {
+    // Validar el cuerpo de la solicitud
+    const body = await request.body()
+    // Buscar la Restaurantesss por ID
+    const theRestaurantes = await Restaurante.findOrFail(params.id);
+    // Actualizar las propiedades de theRestaurantesss con los valores del cuerpo
+    Object.assign(theRestaurantes, body);
+    
+    await theRestaurantes.save();
+    return theRestaurantes;
+  }
 
   public async delete({ params, response }: HttpContextContract) {
     const theRestaurante = await Restaurante.findOrFail(params.id)

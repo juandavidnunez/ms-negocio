@@ -28,12 +28,16 @@ export default class MunicipiosController {
 
 
   public async update({ params, request }: HttpContextContract) {
+    // Validar el cuerpo de la solicitud
     const body = await request.validate(MunicipioValidation);
-    const theMunicipio = await Municipio.findOrFail(params.id)
-    theMunicipio.nombre = body.nombre
-    return theMunicipio.save()
-  }
-
+    // Buscar la Municipio por ID
+    const theMunicipio = await Municipio.findOrFail(params.id);
+    // Actualizar las propiedades de theMunicipio con los valores del cuerpo
+    Object.assign(theMunicipio, body);
+    
+    await theMunicipio.save();
+    return theMunicipio;
+}
 
   public async delete({ params, response }: HttpContextContract) {
     const theMunicipio = await Municipio.findOrFail(params.id)
