@@ -30,10 +30,10 @@ export default class Gasto extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasOne(() => Factura, {
-    foreignKey: 'gasto_id'
+  @belongsTo(() => Factura, {
+    foreignKey: 'factura_id'
   })
-  public personaNatural: HasOne<typeof Factura>
+  public personaNatural: BelongsTo<typeof Factura>
 
   @belongsTo(() => Dueno, {
     foreignKey: 'dueno_id'

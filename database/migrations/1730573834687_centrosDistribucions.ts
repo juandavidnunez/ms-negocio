@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('nombre')
 
       table.integer('municipio_id').unsigned().references('municipios.id')
+      table.integer('direccion_id').unsigned().references('direccions.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
