@@ -33,16 +33,18 @@ export default class EmpresasController {
         return theEmpresa;
     }
 
-    // Update a category by id
     public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const theEmpresa: Empresa = await Empresa.findOrFail(params.id);
-        theEmpresa.razon_social = body.razon_social;
-        theEmpresa.nit = body.nit;
-        theEmpresa.contacto = body.contacto;
-        return await theEmpresa.save();
-    }
-
+        // Validar el cuerpo de la solicitud
+        const body = await request.body()
+        // Buscar la Empresasss por ID
+        const theEmpresas = await Empresa.findOrFail(params.id);
+        // Actualizar las propiedades de theEmpresasss con los valores del cuerpo
+        Object.assign(theEmpresas, body);
+        
+        await theEmpresas.save();
+        return theEmpresas;
+      }
+    
     // Delete a category by id
     public async delete({ params, response }: HttpContextContract) {
         const theEmpresa: Empresa = await Empresa.findOrFail(params.id);

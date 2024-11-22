@@ -17,7 +17,7 @@ export default class CentrosDistribucionsController {
     return CentrosDistribucions
   }
   public async show ({params}:HttpContextContract){
-    return CentrosDistribucion.query().where("id",params.id).preload('Direcciones');
+    return CentrosDistribucion.query().where("id",params.id).preload('direccion')
   }
 
 
@@ -28,13 +28,16 @@ export default class CentrosDistribucionsController {
 
 
   public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(CentrosDistribucionValidation);
-    const theCentrosDistribucion = await CentrosDistribucion.findOrFail(params.id)
-    theCentrosDistribucion.nombre = body.nombre
-    return theCentrosDistribucion.save()
+    // Validar el cuerpo de la solicitud
+    const body = await request.body()
+    // Buscar la CentrosDistribucionss por ID
+    const theCentrosDistribucions = await CentrosDistribucion.findOrFail(params.id);
+    // Actualizar las propiedades de theCentrosDistribucionss con los valores del cuerpo
+    Object.assign(theCentrosDistribucions, body);
+    
+    await theCentrosDistribucions.save();
+    return theCentrosDistribucions;
   }
-
-
   public async delete({ params, response }: HttpContextContract) {
     const theCentrosDistribucion = await CentrosDistribucion.findOrFail(params.id)
     response.status(204)

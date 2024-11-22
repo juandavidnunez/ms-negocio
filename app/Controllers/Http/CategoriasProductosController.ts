@@ -33,12 +33,16 @@ export default class CategoriaProductosProductosController {
         return theCategoriaProducto;
     }
 
-    // Update a category by id
     public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const theCategoriaProducto: CategoriaProducto = await CategoriaProducto.findOrFail(params.id);
-        theCategoriaProducto.cantidad = body.cantidad;
-        return await theCategoriaProducto.save();
+        // Validar el cuerpo de la solicitud
+        const body = await request.body()
+        // Buscar la CategoriaProductos por ID
+        const theCategoriaProductos = await CategoriaProducto.findOrFail(params.id);
+        // Actualizar las propiedades de theCategoriaProductos con los valores del cuerpo
+        Object.assign(theCategoriaProductos, body);
+        
+        await theCategoriaProductos.save();
+        return theCategoriaProductos;
     }
 
     // Delete a category by id
