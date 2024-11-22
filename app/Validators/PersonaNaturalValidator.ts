@@ -25,11 +25,20 @@ export default class PersonaNaturalValidator {
    */
   public schema = schema.create({
     nombre: schema.string.optional(),
-    fecha_nacimiento: schema.string.optional(),
-    cedula: schema.number.optional(),
+    fecha_nacimiento: schema.date.optional({
+      format: 'sql'
+    }),
+    cedula: schema.string.optional(),
     user_id: schema.number([
       rules.required(),
       rules.exists({table: 'usuarios', column: 'id'})
+    ]),
+    cliente: schema.number([
+      rules.required(),
+      rules.exists({table: 'clientes', column: 'id'})
+    ]),
+    empresa: schema.number.optional([
+      rules.exists({table: 'empresas', column: 'id'})
     ])
   })
 
