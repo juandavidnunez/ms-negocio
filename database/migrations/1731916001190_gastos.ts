@@ -8,6 +8,12 @@ export default class extends BaseSchema {
       table.increments('id'),
       table.integer('cantidad')
 
+      table.integer('dueño_id').unsigned().references('duenos.id')
+      table.integer('conductor_id').unsigned().references('conductors.id')
+      table.integer('servicio_id').unsigned().references('servicios.id')
+      table.integer('factura_id').unsigned().references('facturas.id')
+
+
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

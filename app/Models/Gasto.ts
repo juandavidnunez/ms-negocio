@@ -8,6 +8,15 @@ export default class Gasto extends BaseModel {
   @column()
   public cantidad:number
 
+  @column()
+  public dueño_id: number
+
+  @column()
+  public conductor_id: number
+
+  @column()
+  public servicio_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
