@@ -25,14 +25,17 @@ export default class HotelsController {
 
 
   public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(hotelValidation);
-    const theHotel = await Hotel.findOrFail(params.id)
-    theHotel.nombre = body.nombre
-    theHotel.descripcion = body.descripcion
-
-
-    return theHotel.save()
+    // Validar el cuerpo de la solicitud
+    const body = await request.body()
+    // Buscar la Hotelsss por ID
+    const theHotels = await Hotel.findOrFail(params.id);
+    // Actualizar las propiedades de theHotelsss con los valores del cuerpo
+    Object.assign(theHotels, body);
+    
+    await theHotels.save();
+    return theHotels;
   }
+
 
 
   public async delete({ params, response }: HttpContextContract) {

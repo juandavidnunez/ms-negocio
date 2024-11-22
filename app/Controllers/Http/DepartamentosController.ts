@@ -32,10 +32,15 @@ export default class DepartamentosController {
   // Update a driver by id
 
   public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(departamentoValidation)
-    const theDepartamento = await Departamento.findOrFail(params.id)
-    theDepartamento.nombre = body.nombre
-    return theDepartamento.save()
+    // Validar el cuerpo de la solicitud
+    const body = await request.body()
+    // Buscar la Departamentosss por ID
+    const theDepartamentos = await Departamento.findOrFail(params.id);
+    // Actualizar las propiedades de theDepartamentosss con los valores del cuerpo
+    Object.assign(theDepartamentos, body);
+    
+    await theDepartamentos.save();
+    return theDepartamentos;
   }
 
   // Delete a driver by id

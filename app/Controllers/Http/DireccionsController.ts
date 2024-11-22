@@ -25,13 +25,16 @@ export default class DireccionsController {
 
 
   public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(direccionValidation);
-    const theDireccion = await Direccion.findOrFail(params.id)
-    theDireccion.direccion = body.direccion
-
-    return theDireccion.save()
+    // Validar el cuerpo de la solicitud
+    const body = await request.body()
+    // Buscar la Direccionsss por ID
+    const theDireccions = await Direccion.findOrFail(params.id);
+    // Actualizar las propiedades de theDireccionsss con los valores del cuerpo
+    Object.assign(theDireccions, body);
+    
+    await theDireccions.save();
+    return theDireccions;
   }
-
 
   public async delete({ params, response }: HttpContextContract) {
     const theDireccion = await Direccion.findOrFail(params.id)

@@ -37,17 +37,18 @@ export default class LotesController {
             // return await Lote.query().where('id', params.id).preload('productos').firstOrFail();
         }
     
-        // Update a category by id
         public async update({ params, request }: HttpContextContract) {
-            const body = request.body();
-            const theLote: Lote = await Lote.findOrFail(params.id);
-            theLote.cantidad_productos = body.cantidad_productos;
-            theLote.peso_total = body.peso_total;
-            theLote.fecha_creacion = body.fecha_creacion;
-            theLote.fecha_entrega = body.fecha_entrega;
-            return await theLote.save();
-        }
-    
+            // Validar el cuerpo de la solicitud
+            const body = await request.body()
+            // Buscar la Lotesss por ID
+            const theLotes = await Lote.findOrFail(params.id);
+            // Actualizar las propiedades de theLotesss con los valores del cuerpo
+            Object.assign(theLotes, body);
+            
+            await theLotes.save();
+            return theLotes;
+          }
+        
         // Delete a category by id
         public async delete({ params, response }: HttpContextContract) {
             const theLote: Lote = await Lote.findOrFail(params.id);
