@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Producto from 'App/Models/Producto';
+import { productoValidation } from 'App/Validators/ProductoValidator';
 
 export default class ProductosController {
     // Create a new category
@@ -35,13 +36,16 @@ export default class ProductosController {
 
     // Update a category by id
     public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const theProducto: Producto = await Producto.findOrFail(params.id);
-        theProducto.nombre = body.nombre;
-        theProducto.descripcion = body.descripcion;
-        return await theProducto.save();
+        // Validar el cuerpo de la solicitud
+        const body = await request.validate(productoValidation);
+        // Buscar la Producto por ID
+        const theProducto = await Producto.findOrFail(params.id);
+        // Actualizar las propiedades de theProducto con los valores del cuerpo
+        Object.assign(theProducto, body);
+        
+        await theProducto.save();
+        return theProducto;
     }
-
     // Delete a category by id
     public async delete({ params, response }: HttpContextContract) {
         const theProducto: Producto = await Producto.findOrFail(params.id);
