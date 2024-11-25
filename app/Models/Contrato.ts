@@ -9,7 +9,7 @@ export default class Contrato extends BaseModel {
   public id: number
 
   @column()
-  public fecha_creacion: DateTime
+  public fecha_creacion: DateTime | null
 
   @column()
   public cliente_id: number

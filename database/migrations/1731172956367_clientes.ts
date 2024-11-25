@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('nombre')
       table.string('cedula')
 
-      table.string('security_id').notNullable()
+      table.integer('security_id').unsigned().references('usuarios.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

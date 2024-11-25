@@ -10,7 +10,7 @@ export default class ClienteValidator {
       format: 'sql'
     }),
     cedula: schema.string.optional(),
-    user_id: schema.number([
+    security_id: schema.number([
       rules.required(),
       rules.exists({table: 'usuarios', column: 'id'})
     ])

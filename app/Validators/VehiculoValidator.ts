@@ -8,11 +8,10 @@ export default class VehiculoValidator {
     placa: schema.string({},[
       rules.required()
     ]),
-    municipio_id: schema.number([
+    municipio_id: schema.number.optional([
       rules.exists({table: 'municipios', column: 'id'})
     ]),
-    tipo_vehiculo: schema.string({},[
-      rules.required()
+    tipo_vehiculo: schema.string.optional({},[
     ])
   })
 

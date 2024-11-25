@@ -13,14 +13,6 @@ export default class RutaValidator {
       rules.exists({table: 'contratos', column: 'id'})
     ]),
 
-    direccion_inicial_id: schema.number([
-      rules.exists({table: 'direccions', column: 'id'})
-    ]),
-
-    direccion_final_id: schema.number([
-      rules.exists({table: 'direccions', column: 'id'})
-    ])
-
   })
 
 }
