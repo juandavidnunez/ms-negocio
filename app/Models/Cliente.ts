@@ -38,12 +38,12 @@ export default class Cliente extends BaseModel {
   public updatedAt: DateTime
 
   @hasOne(() => Empresa, {
-    foreignKey: 'user_id'
+    foreignKey: 'cliente_id'
   })
   public empresa: HasOne<typeof Empresa>
 
   @hasOne(() => PersonaNatural, {
-    foreignKey: 'user_id'
+    foreignKey: 'cliente_id'
   })
   public persona_natural: HasOne<typeof PersonaNatural>
 }

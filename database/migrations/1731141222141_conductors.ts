@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.date('fecha_nacimiento')
       table.string('cedula')
 
-      table.integer('security_id')
+      table.string('security_id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

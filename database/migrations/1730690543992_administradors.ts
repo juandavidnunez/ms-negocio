@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('nombre')
-      table.integer('security_id')
+      table.string('security_id')
       table.date('fecha_nacimiento')
       table.string('cedula')
 

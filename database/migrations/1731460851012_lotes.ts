@@ -9,7 +9,7 @@ export default class extends BaseSchema {
     
       table.integer('cantidad_productos').notNullable()
       table.integer('peso_total').notNullable()
-      table.datetime('fecha_creacion').notNullable()
+      table.datetime('fecha_creacion')
       table.datetime('fecha_entrega')
 
       table.integer('ruta_id').unsigned().references('rutas.id')

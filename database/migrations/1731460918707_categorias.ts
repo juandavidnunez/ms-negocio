@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.string('descripcion', 255).notNullable()
 
       // Foreign Key to the same table
-      table.integer('categoria_id').unsigned().references("categorias.id")
+      table.integer('categoria_padre_id').unsigned().references("categorias.id")
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
