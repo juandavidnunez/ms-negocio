@@ -8,11 +8,19 @@ export default class FacturaValidator {
     fecha_pago: schema.date({
       format: 'sql'
     }),
-    epayco_info: schema.string({}, [
+    epayco_info: schema.string.optional({}, [
+    ]),
+    valor: schema.number([
+      rules.required()
+    ]),
+    info: schema.string({},[
       rules.required()
     ]),
     success: schema.boolean([
       rules.required()
+    ]),
+    cuota_id: schema.number.optional([
+      rules.exists({table:'cuotas', column:'id'})
     ])
   })
 

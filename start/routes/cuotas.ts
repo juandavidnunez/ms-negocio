@@ -1,9 +1,9 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.get('/cuota', 'CuotasController.findAll')
-  Route.get('/cuota/:id', 'CuotasController.findById')
-  Route.post('/cuota', 'CuotasController.create')
-  Route.put('/cuota/:id', 'CuotasController.update')
-  Route.delete('/cuota/:id', 'CuotasController.delete')
+  Route.get('/cuotas', 'CuotasController.findAll')
+  Route.get('/cuotas/:id', 'CuotasController.findById')
+  Route.post('/cuotas', 'CuotasController.create')
+  Route.put('/cuotas/:id', 'CuotasController.update')
+  Route.delete('/cuotas/:id', 'CuotasController.delete')
 }).middleware(["security"])

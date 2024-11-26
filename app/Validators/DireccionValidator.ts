@@ -6,5 +6,6 @@ export const direccionValidation = {
       rules.required(),
       rules.maxLength(15)
     ]),
+    municipio_id: schema.number.optional()
   })
 }

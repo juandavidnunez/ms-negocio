@@ -6,11 +6,13 @@ export default class RutaValidator {
 
   schema = schema.create({
     Vehiculo_id: schema.number([
-      rules.exists({table: 'vehiculos', column: 'id'})
+      rules.exists({table: 'vehiculos', column: 'id'}),
+      rules.required()
     ]),
 
     contrato_id: schema.number([
-      rules.exists({table: 'contratos', column: 'id'})
+      rules.exists({table: 'contratos', column: 'id'}),
+      rules.required()
     ]),
 
   })

@@ -73,11 +73,12 @@ export default class Vehiculo extends BaseModel {
   })
   public conductores: ManyToMany<typeof Conductor>
 
-  @manyToMany(() => Contrato,{
+  @manyToMany(() => Contrato, {
     pivotTable: 'rutas',
+    localKey: 'id',
     pivotForeignKey: 'vehiculo_id',
-    pivotRelatedForeignKey: 'contrato_id',
-    pivotColumns: []
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'contrato_id'
   })
   public contratos: ManyToMany<typeof Contrato>
 

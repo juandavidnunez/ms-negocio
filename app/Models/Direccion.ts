@@ -26,8 +26,11 @@ export default class Direccion extends BaseModel {
 
   @manyToMany(() => Ruta, {
     pivotTable: 'dirlistaordenes',
+    localKey: 'id',
     pivotForeignKey: 'direccion_id',
+    relatedKey: 'id',
     pivotRelatedForeignKey: 'ruta_id',
+    
   })
   public rutas: ManyToMany<typeof Ruta>
 }

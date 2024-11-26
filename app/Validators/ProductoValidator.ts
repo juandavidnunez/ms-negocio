@@ -5,10 +5,12 @@ export const productoValidation = {
       nombre: schema.string({}, [
         rules.required(),
         rules.maxLength(50)
-      ]), descripcion: schema.string({}, [
+      ]), 
+      descripcion: schema.string({}, [
         rules.required(),
         rules.maxLength(150)
       ]),
+      precio: schema.number.optional(),
       lote_id: schema.number([
         rules.required(),
         rules.exists({ table: 'lote', column: 'id' })

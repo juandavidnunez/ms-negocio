@@ -8,7 +8,7 @@ import Cuota from 'App/Models/Cuota';
 
 export default class FacturasController {
 
-    public async create({ request, response }: HttpContextContract) {
+    public async pagar({ request, response }: HttpContextContract) {
         try {
             let body = request.body();
 
@@ -49,6 +49,12 @@ export default class FacturasController {
             console.error('Error al consumir la API de Pagos:', error);
             response.status(error.response?.status || 500).send('Error al consumir la API de Adonis');
         }
+    }
+
+    public async create({ request }: HttpContextContract) {
+        const body = await request.validate(FacturaValidator);
+        const theFactura = await Factura.create(body)
+        return theFactura
     }
     
     public async findAll({ request }: HttpContextContract) {
