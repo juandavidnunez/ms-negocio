@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.datetime('fecha_entrega')
 
       table.integer('ruta_id').unsigned().references('rutas.id')
-      table.integer('dir_lista_orden_id').unsigned().references('dirlistaordenes.id')
+      table.integer('dir_lista_orden_id').unsigned().references('dir_lista_ordens.id')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

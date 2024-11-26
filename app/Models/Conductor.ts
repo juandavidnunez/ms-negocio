@@ -18,12 +18,7 @@ export default class Conductor extends BaseModel {
   public cedula: string
 
   @column()
-  public user_id: number // Id for the user in users
-
-  @belongsTo(() => Usuario, {
-    foreignKey: 'user_id',
-  })
-  public usuario: BelongsTo<typeof Usuario>
+  public security_id: string // Id for the user in users
 
   @hasOne(() => VehiculoConductor, {
     foreignKey: 'vehiculo_id'

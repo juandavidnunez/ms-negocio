@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import Usuario from './Usuario'
 
 export default class Administrador extends BaseModel {
   @column({ isPrimary: true })
@@ -16,12 +15,7 @@ export default class Administrador extends BaseModel {
   public cedula: string
 
   @column()
-  public user_id: number // Id for the user in users
-
-  @belongsTo(() => Usuario, {
-    foreignKey: 'user_id',
-  })
-  public usuario: BelongsTo<typeof Usuario>
+  public security_id: string // Id for the user in users
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

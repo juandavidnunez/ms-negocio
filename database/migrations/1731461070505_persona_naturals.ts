@@ -8,10 +8,11 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('nombre')
+      table.string('cedula')
+      table.date('fecha_nacimiento')
 
       table.integer('cliente_id').unsigned().references('clientes.id')
       table.integer('empresa_id').unsigned().references('empresas.id')
-      table.integer('usuario_id').unsigned().references('usuarios.id')
 
 
       table.timestamp('created_at', { useTz: true })

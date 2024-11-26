@@ -7,9 +7,8 @@ export const administradorValidation = {
       format: 'yyyy-MM-dd'
     }),
     cedula: schema.string.optional(),
-    user_id: schema.number([
-      rules.required(),
-      rules.exists({table: 'usuarios', column: 'id'})
+    security_id: schema.string([
+      rules.required()
     ])
   })}
 
