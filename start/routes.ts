@@ -54,6 +54,7 @@ import './routes/vehiculos'
 import './routes/vehiculoDuenos'
 import './routes/turnos'
 import './routes/anotaciones'
+import './routes/facturas'
 
 
 

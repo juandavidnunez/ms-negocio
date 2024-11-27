@@ -13,7 +13,7 @@ export default class FacturaValidator {
     valor: schema.number([
       rules.required()
     ]),
-    info: schema.string({},[
+    bill: schema.string({},[
       rules.required()
     ]),
     success: schema.boolean([

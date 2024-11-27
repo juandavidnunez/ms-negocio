@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('nombre')
       table.string('cedula')
       table.date('fecha_nacimiento')
+      table.string('security_id')
 
       table.integer('cliente_id').unsigned().references('clientes.id')
       table.integer('empresa_id').unsigned().references('empresas.id')

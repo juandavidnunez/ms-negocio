@@ -11,8 +11,7 @@ export const productoValidation = {
         rules.maxLength(150)
       ]),
       precio: schema.number.optional(),
-      lote_id: schema.number([
-        rules.required(),
+      lote_id: schema.number.optional([
         rules.exists({ table: 'lote', column: 'id' })
       ]),
       cliente_id: schema.number([

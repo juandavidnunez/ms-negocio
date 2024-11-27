@@ -24,9 +24,13 @@ export default class FacturasController {
             if(!theCuota){
                 throw new Error("No se encuentra la cuota")
             }
-            if(theCuota.valor != body.valor){
+            if(theCuota.valor != body.value){
                 throw new Error("El valor de la cuota no es el mismo a pagar")
             }
+
+            body.description = 'Pago de una cuota de Servicio de transporte'
+            
+            console.log(body)
 
             const adonisResponse = await axios.post(pagos_host, {
                 body
@@ -36,13 +40,13 @@ export default class FacturasController {
             const factura = {
                 "fecha_pago": adonisResponse.data?.data?.fecha || null, // Usar null si no existe
                 "valor": adonisResponse.data?.data?.valor || null, // Usar null si no existe
-                "info": adonisResponse.data || null, // Usar null si no existe
+                "bill": body.bill || null, // Usar null si no existe
                 "success": adonisResponse.data?.status || false, // Usar false si no existe
-                "cuota_id": cuota_id // Usar null si no existe
+                "cuota_id": cuota_id 
             };
         
             // Guardar la factura
-            Factura.create(factura)
+            return Factura.create(factura)
 
         } catch (error) {
             // Manejar errores

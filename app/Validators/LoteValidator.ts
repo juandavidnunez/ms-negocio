@@ -12,7 +12,7 @@ export const loteValidation = {
         rules.exists({ table: 'rutas', column: 'id' })
       ]),
       fecha_creacion: schema.date.optional({
-        format:'YYYY-MM-DD HH:mm:ss'
+        format:'mysql'
       },[
         rules.required()
       ]),

@@ -14,7 +14,7 @@ export default class Factura extends BaseModel {
   public valor: number
 
   @column()
-  public info: string
+  public bill: string
 
   @column()
   public success: boolean

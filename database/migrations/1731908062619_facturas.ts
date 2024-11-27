@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.dateTime('fecha_pago')
       table.integer('valor')
-      table.string('info')
+      table.string('bill')
       table.boolean('success')
 
       table.integer('cuota_id').unsigned().references('cuotas.id')

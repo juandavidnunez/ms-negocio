@@ -17,10 +17,10 @@ export default class Lote extends BaseModel {
   @column()
   public peso_total: number
 
-  @column()
+  @column.dateTime()
   public fecha_creacion: DateTime
 
-  @column()
+  @column.dateTime()
   public fecha_entrega: DateTime
 
   @column()

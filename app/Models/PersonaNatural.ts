@@ -22,6 +22,9 @@ export default class PersonaNatural extends BaseModel {
   @column()
   public empresa_id: number
 
+  @column()
+  public security_id: string
+
 
   @belongsTo(() => Empresa,{
     foreignKey: 'empresa_id'
