@@ -11,7 +11,7 @@ export default class Vehiculo extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column({isPrimary: true})
+  @column( )
   public placa: string
 
   // referencia a municipio
