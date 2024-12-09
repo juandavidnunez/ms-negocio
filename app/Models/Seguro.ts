@@ -6,10 +6,10 @@ export default class Seguro extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
+  @column.dateTime()
   public fecha_inicio: DateTime
 
-  @column()
+  @column.dateTime()
   public fecha_vencimiento: DateTime
 
   @column()

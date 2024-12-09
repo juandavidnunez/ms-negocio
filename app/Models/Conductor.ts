@@ -20,13 +20,9 @@ export default class Conductor extends BaseModel {
   @column()
   public security_id: string // Id for the user in users
 
-  @hasOne(() => VehiculoConductor, {
-    foreignKey: 'vehiculo_id'
-  })
-  public vehiculoConductor: HasOne<typeof VehiculoConductor>
 
   @hasMany(() => Turno, {
-    foreignKey: 'vehiculo_id'
+    foreignKey: 'conductor_id'
   })
   public turno: HasMany<typeof Turno>
 

@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Vehiculo from 'App/Models/Vehiculo';
+import Ws from 'App/Services/Ws';
 import VehiculoValidator from 'App/Validators/VehiculoValidator';
 
 export default class VehiculosController {
@@ -8,7 +9,7 @@ export default class VehiculosController {
         const theVehiculo = await Vehiculo.create(body)
         return theVehiculo
     }
-    
+
     public async findAll({ request }: HttpContextContract) {
         const page = request.input('page', 1)
         const perPage = request.input('perPage', 20)
@@ -21,8 +22,8 @@ export default class VehiculosController {
         const theVehiculo = await Vehiculo.findOrFail(params.id)
         return theVehiculo
     }
-    
-    
+
+
     public async update({ params, request }: HttpContextContract) {
         // Validar el cuerpo de la solicitud
         const body = await request.validate(VehiculoValidator);
@@ -30,14 +31,23 @@ export default class VehiculosController {
         const theVehiculo = await Vehiculo.findOrFail(params.id);
         // Actualizar las propiedades de theVehiculo con los valores del cuerpo
         Object.assign(theVehiculo, body);
-        
+
         await theVehiculo.save();
         return theVehiculo;
     }
-    
-      public async delete({ params, response }: HttpContextContract) {
+
+    public async delete({ params, response }: HttpContextContract) {
         const theVehiculo = await Vehiculo.findOrFail(params.id)
         response.status(204)
         return await theVehiculo.delete()
+    }
+    
+    public async test({ response }: HttpContextContract) {
+        Ws.io.emit('notifications', { message: 'Nueva notificación' })
+
+        response.status(200);
+        return {
+            "message": "ok"
+        };
     }
 }

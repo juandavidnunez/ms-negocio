@@ -8,7 +8,7 @@ export default class Direccion extends BaseModel {
   public id: number
 
   @column()
-  public direccion : string
+  public direccion : string  // Latitud y Longitud  y Open maps en js
 
   @column()
   public municipio_id: number
