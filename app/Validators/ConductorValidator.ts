@@ -11,9 +11,7 @@ export default class ConductorValidator {
       format: 'yyyy-MM-dd'
     }),
     cedula: schema.string.optional(),
-    security_id: schema.string([
-      rules.required(),
-    ])
+    security_id: schema.string.optional()
   })
 
   /**
