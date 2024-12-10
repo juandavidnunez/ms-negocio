@@ -9,6 +9,10 @@ export const CentrosDistribucionValidation = {
         municipio_id: schema.number([
       rules.required(),
       rules.exists({ table: 'municipios', column: 'id' })
+    ]),
+    direccion_id: schema.number([
+      rules.required(),
+      rules.exists({ table: 'direccions', column: 'id' })
     ])
   })
 }

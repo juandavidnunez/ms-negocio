@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Gasto from 'App/Models/Gasto';
 import { GastoValidation } from 'App/Validators/GastoValidator';
-import { hotelValidation } from 'App/Validators/HotelValidator';
 
 export default class GastosController {
 
@@ -26,12 +25,15 @@ export default class GastosController {
 
 
   public async update({ params, request }: HttpContextContract) {
-    const body = await request.validate(GastoValidation);
-    const theGasto = await Gasto.findOrFail(params.id)
-    theGasto.cantidad = body.cantidad
-
-
-    return theGasto.save()
+    // Validar el cuerpo de la solicitud
+    const body = await request.body()
+    // Buscar la Gastosss por ID
+    const theGastos = await Gasto.findOrFail(params.id);
+    // Actualizar las propiedades de theGastosss con los valores del cuerpo
+    Object.assign(theGastos, body);
+    
+    await theGastos.save();
+    return theGastos;
   }
 
 

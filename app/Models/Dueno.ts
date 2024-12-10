@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import VehiculoDueno from './VehiculoDueno'
-import Usuario from './Usuario'
+import Vehiculo from './Vehiculo'
 
 export default class Dueno extends BaseModel {
   @column({ isPrimary: true })
@@ -16,21 +16,25 @@ export default class Dueno extends BaseModel {
   @column()
   public fecha_nacimiento: DateTime
 
-  @column({isPrimary: true})
+  @column( )
   public cedula: string
 
   @column()
-  public user_id: number // Id for the user in users
-
-  @belongsTo(() => Usuario, {
-    foreignKey: 'user_id',
-  })
-  public usuario: BelongsTo<typeof Usuario>
+  public security_id: string // Id for the user in users
 
   @hasMany(() => VehiculoDueno, {
     foreignKey: 'vehiculo_id'
   })
   public vehiculoDueno: HasMany<typeof VehiculoDueno>
+
+  @manyToMany(() => Vehiculo, {
+    pivotTable: 'vehiculo_duenos',
+    localKey: 'id',
+    pivotForeignKey: 'dueno_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'vehiculo_id'
+  })
+  public vehiculos: ManyToMany<typeof Vehiculo>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

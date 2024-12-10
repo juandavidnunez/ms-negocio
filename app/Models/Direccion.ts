@@ -8,13 +8,10 @@ export default class Direccion extends BaseModel {
   public id: number
 
   @column()
-  public direccion : string
+  public direccion : string  // Latitud y Longitud  y Open maps en js
 
   @column()
   public municipio_id: number
-
-  @column()
-  public centros_distribucion_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -29,8 +26,11 @@ export default class Direccion extends BaseModel {
 
   @manyToMany(() => Ruta, {
     pivotTable: 'dirlistaordenes',
+    localKey: 'id',
     pivotForeignKey: 'direccion_id',
+    relatedKey: 'id',
     pivotRelatedForeignKey: 'ruta_id',
+    
   })
   public rutas: ManyToMany<typeof Ruta>
 }

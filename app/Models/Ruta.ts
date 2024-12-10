@@ -10,12 +10,6 @@ export default class Ruta extends BaseModel {
   public id: number
 
   @column()
-  public direccion_inicial: string
-
-  @column()
-  public direccion_final: string
-
-  @column()
   public vehiculo_id: number
 
   @column()
@@ -26,23 +20,16 @@ export default class Ruta extends BaseModel {
   })
   public lotes: HasMany<typeof Lote>
 
-  @belongsTo(() => Vehiculo, {
-    foreignKey: 'vehiculo_id',
-  })
-  public vehiculo: BelongsTo<typeof Vehiculo>
-
-  @belongsTo(() => Contrato, {
-    foreignKey: 'contrato_id',
-  })
-  public contrato: BelongsTo<typeof Contrato>
 
   @manyToMany(() => Direccion, {
     pivotTable: 'dirlistaordenes',
-    pivotForeignKey: "ruta_id",
-    pivotRelatedForeignKey: "direccion_id",
-    pivotColumns: ['orden']
+    localKey: 'id',
+    pivotForeignKey: 'ruta_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'direccion_id',
   })
   public direcciones: ManyToMany<typeof Direccion>
+
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

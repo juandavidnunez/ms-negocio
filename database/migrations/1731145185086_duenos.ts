@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.date('fecha_nacimiento')
       table.string('cedula').unique()
 
-      table.integer('user_id').unsigned().references('usuarios.id')
+      table.string('security_id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -12,6 +12,18 @@ export default class Lote extends BaseModel {
   public dir_lista_orden_id: number
 
   @column()
+  public cantidad_productos: number
+
+  @column()
+  public peso_total: number
+
+  @column.dateTime()
+  public fecha_creacion: DateTime
+
+  @column.dateTime()
+  public fecha_entrega: DateTime
+
+  @column()
   public ruta_id: number
 
   @column.dateTime({ autoCreate: true })

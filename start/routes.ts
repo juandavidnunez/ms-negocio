@@ -54,6 +54,12 @@ import './routes/vehiculos'
 import './routes/vehiculoDuenos'
 import './routes/turnos'
 import './routes/anotaciones'
+import './routes/facturas'
 
+Route.get('/Operaciones', 'OperacionesController.findAll')
+Route.get('/Operaciones/:id', 'OperacionesController.findById')
+Route.post('/Operaciones', 'OperacionesController.create')
+Route.put('/Operaciones/:id', 'OperacionesController.update')
+Route.delete('/Operaciones/:id', 'OperacionesController.delete')
 
 

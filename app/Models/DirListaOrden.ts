@@ -3,7 +3,6 @@ import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, hasOne, HasO
 import Lote from './Lote'
 import Ruta from './Ruta'
 import Direccion from './Direccion'
-import Anotacion from './Anotacion'
 
 export default class DirListaOrden extends BaseModel {
   @column({ isPrimary: true })
@@ -39,8 +38,4 @@ export default class DirListaOrden extends BaseModel {
   })
   public lote: HasOne<typeof Lote>
 
-  @hasMany(() => Anotacion, {
-    foreignKey: 'dir_lista_orden_id'
-  })
-  public anotaciones: HasMany<typeof Anotacion>
 }

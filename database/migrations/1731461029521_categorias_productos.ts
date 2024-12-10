@@ -8,7 +8,6 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer('cantidad').notNullable()
 
-      table.integer('cantidad').notNullable()
       table.integer('categoria_id').unsigned().references('categorias.id').notNullable()
       table.integer('producto_id').unsigned().references('productos.id').notNullable()
       

@@ -8,10 +8,10 @@ export default class SeguroValidator {
     vehiculo_id: schema.number([
       rules.exists({table: 'vehiculos', column: 'id'})
     ]),
-    fecha_inicio: schema.date({
+    fecha_inicio: schema.date.optional({
       format: 'sql'
     }),
-    fecha_vencimiento: schema.date({
+    fecha_vencimiento: schema.date.optional({
       format: 'sql'
     })
   })

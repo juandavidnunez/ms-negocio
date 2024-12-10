@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, Has, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Cuota from './Cuota'
 import Gasto from './Gasto'
 
@@ -14,7 +14,7 @@ export default class Factura extends BaseModel {
   public valor: number
 
   @column()
-  public info: string
+  public bill: string
 
   @column()
   public success: boolean
@@ -22,18 +22,15 @@ export default class Factura extends BaseModel {
   @column()
   public cuota_id: number
 
-  @column()
-  public gasto_id: number
-
   @belongsTo(() => Cuota, {
     foreignKey: 'cuota_id'
   })
   public cuota: BelongsTo<typeof Cuota>
 
-  @belongsTo(() => Gasto, {
+  @hasOne(() => Gasto, {
     foreignKey: 'gasto_id'
   })
-  public gasto: BelongsTo<typeof Gasto>
+  public gasto: HasOne<typeof Gasto>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

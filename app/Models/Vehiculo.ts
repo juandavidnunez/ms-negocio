@@ -1,11 +1,8 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Seguro from './Seguro'
-import VehiculoDueno from './VehiculoDueno'
-import VehiculoConductor from './VehiculoConductor'
 import Ruta from './Ruta'
 import Operacion from './Operacion'
-import Municipio from './Municipio'
 import Dueno from './Dueno'
 import Conductor from './Conductor'
 import Contrato from './Contrato'
@@ -14,7 +11,7 @@ export default class Vehiculo extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column({isPrimary: true})
+  @column( )
   public placa: string
 
   // referencia a municipio
@@ -29,15 +26,24 @@ export default class Vehiculo extends BaseModel {
   })
   public seguro: HasMany<typeof Seguro>
 
-  @hasMany(() => VehiculoDueno, {
-    foreignKey: 'vehiculo_id'
+  @manyToMany(() => Dueno, {
+    pivotTable: 'vehiculo_duenos',
+    localKey: 'id',
+    pivotForeignKey: 'vehiculo_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'dueno_id'
   })
-  public vehiculoDueno: HasMany<typeof VehiculoDueno>
+  public duenos: ManyToMany<typeof Dueno>
 
-  @hasMany(() => VehiculoConductor, {
-    foreignKey: 'vehiculo_id'
+
+  @manyToMany(() => Conductor, {
+    pivotTable: 'vehiculo_conductors',
+    localKey: 'id',
+    pivotForeignKey: 'vehiculo_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'conductor_id'
   })
-  public vehiculoConductor: HasMany<typeof VehiculoConductor>
+  public conductores: ManyToMany<typeof Conductor>
 
   @hasMany(() => Ruta, {
     foreignKey: 'vehiculo_id'
@@ -49,35 +55,12 @@ export default class Vehiculo extends BaseModel {
   })
   public operacion: HasMany<typeof Operacion>
 
-  @manyToMany(() => Municipio,{
-    pivotTable: 'operaciones',
-    pivotForeignKey: 'vehiculo_id',
-    pivotRelatedForeignKey: 'municipio_id',
-    pivotColumns: []
-  })
-  public municipios: ManyToMany<typeof Municipio>
-
-  @manyToMany(() => Dueno,{
-    pivotTable: 'vehiculo_duenos',
-    pivotForeignKey: 'vehiculo_id',
-    pivotRelatedForeignKey: 'dueno_id',
-    pivotColumns: []
-  })
-  public duenos: ManyToMany<typeof Dueno>
-
-  @manyToMany(() => Conductor, {
-    pivotTable: 'vehiculo_conductors',
-    pivotForeignKey: 'vehiculo_id',
-    pivotRelatedForeignKey: 'conductor_id',
-    pivotColumns: []
-  })
-  public conductores: ManyToMany<typeof Conductor>
-
-  @manyToMany(() => Contrato,{
+  @manyToMany(() => Contrato, {
     pivotTable: 'rutas',
+    localKey: 'id',
     pivotForeignKey: 'vehiculo_id',
-    pivotRelatedForeignKey: 'contrato_id',
-    pivotColumns: []
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'contrato_id'
   })
   public contratos: ManyToMany<typeof Contrato>
 

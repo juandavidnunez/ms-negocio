@@ -1,52 +1,104 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import PersonaNatural from 'App/Models/PersonaNatural';
+import PersonaNaturalValidator from 'App/Validators/PersonaNaturalValidator';
+import env from '@ioc:Adonis/Core/Env'
+import axios from 'axios';
 
 export default class PersonasNaturalesController {
-    // Create a new natural person
-    public async create({ request }: HttpContextContract) {
-        const body = request.body();
-        const thePersonaNatural: PersonaNatural = await PersonaNatural.create(body);
-        return thePersonaNatural;
-    }
 
-    // Get all natural person
-    public async findAll({ request }: HttpContextContract) {
-        const data = request.all();
-        if ("page" in data && "per_page" in data) {
-            const page = request.input('page', 1);
-            const perPage = request.input('perPage', 20);
-            return await PersonaNatural.query().paginate(page, perPage);
-        } else {
-            return await PersonaNatural.query();
+  public async create({ request, response }: HttpContextContract) {
+    try {
+      let body = request.only(['name', 'email', 'password']);
+      const token = request.header('Authorization');
+      const toke=token
+  
+      if (!token) {
+        return response.status(401).send('Token de acceso faltante');
+      }
+
+      // Crear usuario
+      const userResponse = await axios.post(
+        `${env.get('MS_SECURITY')}/api/users`
+        ,
+        {
+          name: body.name,
+          email: body.email,
+          password: body.password,
+        },
+        {
+          headers: {
+            'Authorization': token,
+          },
         }
+      );
+  
+      // Obtener el ID del usuario desde la respuesta
+      const userId = userResponse.data._id;
+  
+      // Verificar que el ID del usuario no sea undefined
+      if (!userId) {
+        return response.status(500).send('Error al crear el usuario, ID no encontrado');
+      }
+      console.log(toke)
+
+      // Asignar rol al usuario creado
+      const roleResponse = await axios.post(
+        `${env.get('MS_SECURITY')}/api/user_roles/user/${userId}/role/${env.get('PERSONA_NATURAL_ROLE_ID')}`,
+        {},
+        {
+          headers: {
+            'Authorization': toke,
+          },
+        }
+      );
+
+      console.log(roleResponse.data)
+  
+      const tempBody = await request.validate(PersonaNaturalValidator);
+      tempBody.security_id = userId;
+      const thePersonaNatural = await PersonaNatural.create(tempBody)
+      return thePersonaNatural
+
+    } catch (error) {
+      console.error('Error al consumir la API de Seguridad:', error);
+  
+      // Manejo de errores con detalles
+      const status = error.response?.status || 500;
+      const message = error.response?.data || 'Error al consumir la API de Seguridad';
+  
+      response.status(status).send(message);
+    }
+  }
+    
+    public async findAll({ request }: HttpContextContract) {
+        const page = request.input('page', 1)
+        const perPage = request.input('perPage', 20)
+        let PersonaNaturals: PersonaNatural[] = await PersonaNatural.query().paginate(page, perPage)
+        return PersonaNaturals
     }
 
-    //Devuelve los productos de una personanatural
-    // public async findProductos({ params }: HttpContextContract) {
-    //     let thePersonaNatural: PersonaNatural = await PersonaNatural.query().where('id', params.id).preload('productos').firstOrFail();
-    //     return thePersonaNatural;
-    // }
 
-    // Get a natural person by id
     public async findById({ params }: HttpContextContract) {
-        const thePersonaNatural: PersonaNatural = await PersonaNatural.findOrFail(params.id);
+        const thePersonaNatural = await PersonaNatural.findOrFail(params.id)
+        return thePersonaNatural
+    }
+    
+    
+    public async update({ params, request }: HttpContextContract) {
+        // Validar el cuerpo de la solicitud
+        const body = await request.validate(PersonaNaturalValidator);
+        // Buscar la PersonaNatural por ID
+        const thePersonaNatural = await PersonaNatural.findOrFail(params.id);
+        // Actualizar las propiedades de thePersonaNatural con los valores del cuerpo
+        Object.assign(thePersonaNatural, body);
+        
+        await thePersonaNatural.save();
         return thePersonaNatural;
     }
-
-    // Update a natural person by id
-    public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const thePersonaNatural: PersonaNatural = await PersonaNatural.findOrFail(params.id);
-        thePersonaNatural.nombre = body.nombre;
-        thePersonaNatural.apellido = body.apellido;
-        thePersonaNatural.cedula = body.cedula;
-        return await thePersonaNatural.save();
-    }
-
-    // Delete a natural person by id
-    public async delete({ params, response }: HttpContextContract) {
-        const thePersonaNatural: PersonaNatural = await PersonaNatural.findOrFail(params.id);
-        response.status(204);
-        return await thePersonaNatural.delete();
+    
+      public async delete({ params, response }: HttpContextContract) {
+        const thePersonaNatural = await PersonaNatural.findOrFail(params.id)
+        response.status(204)
+        return await thePersonaNatural.delete()
     }
 }

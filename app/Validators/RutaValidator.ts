@@ -5,21 +5,15 @@ export default class RutaValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   schema = schema.create({
-    Vehiculo_id: schema.number([
-      rules.exists({table: 'vehiculos', column: 'id'})
+    vehiculo_id: schema.number([
+      rules.exists({table: 'vehiculos', column: 'id'}),
+      rules.required()
     ]),
 
     contrato_id: schema.number([
-      rules.exists({table: 'contratos', column: 'id'})
+      rules.exists({table: 'contratoes', column: 'id'}),
+      rules.required()
     ]),
-
-    direccion_inicial_id: schema.number([
-      rules.exists({table: 'direccions', column: 'id'})
-    ]),
-
-    direccion_final_id: schema.number([
-      rules.exists({table: 'direccions', column: 'id'})
-    ])
 
   })
 

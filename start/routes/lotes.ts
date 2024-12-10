@@ -1,9 +1,9 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.get('/lote', 'LotesController.findAll')
-  Route.get('/lote/:id', 'LotesController.findById')
-  Route.post('/lote', 'LotesController.create')
-  Route.put('/lote/:id', 'LotesController.update')
-  Route.delete('/lote/:id', 'LotesController.delete')
+  Route.get('/lotes', 'LotesController.findAll')
+  Route.get('/lotes/:id', 'LotesController.findById')
+  Route.post('/lotes', 'LotesController.create')
+  Route.put('/lotes/:id', 'LotesController.update')
+  Route.delete('/lotes/:id', 'LotesController.delete')
 }).middleware(["security"])

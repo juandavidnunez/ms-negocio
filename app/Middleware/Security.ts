@@ -1,6 +1,4 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import axios from 'axios';
-import env from '@ioc:Adonis/Core/Env'
+import type { HttpContextContract } fr
 
 export default class Security {
   /**
@@ -10,8 +8,8 @@ export default class Security {
    * @returns 
    */
   public async handle({ request, response }: HttpContextContract, next: () => Promise<void>) {
-    // await next()
-    let theRequest = request.toJSON() // Convertir la solicitud a un objeto JSON
+    await next()
+/*    let theRequest = request.toJSON()
     console.log(theRequest);
     let token = theRequest.headers.authorization.replace("Bearer ", "") // Obtener el token de autorización 
     // Crear un objeto con los datos de permiso: URL y el método de la solicitud
@@ -41,5 +39,5 @@ export default class Security {
       console.error(error)
       return response.status(401)
     }
-  }
+  } */
 }

@@ -1,15 +1,16 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany} from '@ioc:Adonis/Lucid/Orm'
 import Ruta from './Ruta'
 import Cliente from './Cliente'
 import Cuota from './Cuota'
+import Vehiculo from './Vehiculo'
 
 export default class Contrato extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public fecha_creacion: DateTime
+  public fecha_creacion: DateTime | null
 
   @column()
   public cliente_id: number
@@ -19,10 +20,14 @@ export default class Contrato extends BaseModel {
   })
   public cliente: BelongsTo<typeof Cliente>
 
-  @hasMany(()=> Ruta, {
-    foreignKey: 'contrato_id'
+  @manyToMany(() => Vehiculo, {
+    pivotTable: 'rutas',
+    localKey: 'id',
+    pivotForeignKey: 'contrato_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'vehiculo_id'
   })
-  public rutas: HasMany<typeof Ruta>
+  public vehiculos: ManyToMany<typeof Vehiculo>
 
   @hasMany(()=> Cuota, {
     foreignKey: 'contrato_id'

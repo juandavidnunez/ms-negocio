@@ -9,6 +9,9 @@ export const CategoriaValidation = {
     descripcion: schema.string({}, [
       rules.required(),
       rules.maxLength(150)
+    ]),
+    categoriaPadreId: schema.number.optional([
+      rules.exists({table: 'categorias', column:'id'})
     ])
   })
 }

@@ -9,11 +9,10 @@ export default class extends BaseSchema {
 
       table.dateTime('fecha_pago')
       table.integer('valor')
-      table.string('info')
+      table.string('bill')
       table.boolean('success')
 
       table.integer('cuota_id').unsigned().references('cuotas.id')
-      table.integer('gasto_id').unsigned().references('gastos.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

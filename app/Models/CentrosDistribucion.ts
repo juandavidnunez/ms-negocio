@@ -13,6 +13,9 @@ export default class CentrosDistribucion extends BaseModel {
   @column()
   public municipio_id: number
 
+  @column()
+  public direccion_id: number
+
   @belongsTo(() => Direccion, {
     foreignKey: 'direccion_id'
   })

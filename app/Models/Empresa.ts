@@ -30,11 +30,6 @@ export default class Empresa extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Cliente, {
-    foreignKey: 'cliente_id'
-  })
-  public cliente: BelongsTo<typeof Cliente>
-
   @hasOne(() => PersonaNatural, {
     foreignKey: 'empresa_id'
   })
