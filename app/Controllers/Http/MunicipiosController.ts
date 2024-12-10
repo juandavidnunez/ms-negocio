@@ -1,14 +1,19 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Municipio from 'App/Models/Municipio';
 import { MunicipioValidation } from 'App/Validators/MunicipioValidator';
+import axios from 'axios';
 
 
 export default class MunicipiosController {
 
   public async create({ request }: HttpContextContract) {
-    const body = await request.validate(MunicipioValidation);
-    const theMunicipio = await Municipio.create(body)
-    return theMunicipio
+    const response = await axios.get<{ id: number, name: string, departmentId: number }[]>("https://api-colombia.com/api/v1/City")
+    const municipios = response.data
+    console.log(municipios)
+    municipios.forEach(async element => {
+      await Municipio.create({"id":element.id,"nombre":element.name, "departamento_id":element.departmentId})
+    });
+    return municipios
   }
 
   public async findAll({ request }: HttpContextContract) {

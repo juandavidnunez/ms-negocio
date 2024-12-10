@@ -11,7 +11,7 @@ export default class Conductor extends BaseModel {
   @column()
   public nombre: string
 
-  @column()
+  @column.dateTime()
   public fecha_nacimiento: DateTime
 
   @column()

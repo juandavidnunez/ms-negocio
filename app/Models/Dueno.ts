@@ -13,7 +13,7 @@ export default class Dueno extends BaseModel {
   @column()
   public email: string
 
-  @column()
+  @column.dateTime()
   public fecha_nacimiento: DateTime
 
   @column( )

@@ -77,6 +77,7 @@ export default class ConductorsController {
 
     public async findById({ params }: HttpContextContract) {
         const theConductor = await Conductor.findOrFail(params.id)
+        await theConductor.load('vehiculos')
         return theConductor
     }
 
@@ -98,4 +99,5 @@ export default class ConductorsController {
         response.status(204)
         return await theConductor.delete()
     }
+
 }

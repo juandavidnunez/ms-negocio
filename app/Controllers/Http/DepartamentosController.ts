@@ -1,14 +1,19 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Departamento from 'App/Models/Departamento'
 import { departamentoValidation } from 'App/Validators/DepartamentoValidator'
+import axios from 'axios'
 
 
 export default class DepartamentosController {
   // Create a new Departament
   public async create({ request }: HttpContextContract) {
-    const body = await request.validate(departamentoValidation)
-    const theDepartamento = await Departamento.create(body)
-    return theDepartamento
+    const response = await axios.get<{ id: number, name: string }[]>("https://api-colombia.com/api/v1/Department")
+    const departamentos = response.data
+    console.log(departamentos)
+    departamentos.forEach(async element => {
+      await Departamento.create({"id":element.id,"nombre":element.name})
+    });
+    return departamentos
   }
 
   // Get all Departament
