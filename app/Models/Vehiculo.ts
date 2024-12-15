@@ -21,6 +21,12 @@ export default class Vehiculo extends BaseModel {
   @column()
   public tipo_vehiculo: string
 
+  @column()
+  public latitud: string;
+
+  @column()
+  public longitud: string;
+
   @hasMany(() => Seguro, {
     foreignKey: 'vehiculo_id'
   })

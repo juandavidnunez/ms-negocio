@@ -5,7 +5,6 @@ import env from '@ioc:Adonis/Core/Env'
 import axios from 'axios';
 export default class AdministradorsController {
 
-
   public async create({ request, response }: HttpContextContract) {
     try {
       let body = request.only(['name', 'email', 'password']);

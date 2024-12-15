@@ -6,7 +6,7 @@ export default class FacturaValidator {
 
   public schema = schema.create({
     fecha_pago: schema.date({
-      format: 'sql'
+      format: 'dd-mm-yyyy'
     }),
     epayco_info: schema.string.optional({}, [
     ]),

@@ -9,7 +9,7 @@ export default class Administrador extends BaseModel {
   public nombre: string
 
   @column()
-  public fecha_nacimiento: DateTime
+  public NIT: string
 
   @column( )
   public cedula: string

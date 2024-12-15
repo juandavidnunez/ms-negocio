@@ -9,7 +9,7 @@ export default class ContratoValidator {
       rules.exists({table: 'clientes', column: 'id'})
     ]),
     fecha_creacion: schema.date.optional({
-      format: 'yyyy-mm-dd'
+      format: 'dd-mm-yyyy'
     })
   })
 
