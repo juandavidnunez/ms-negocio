@@ -41,4 +41,5 @@ export default class VehiculoConductorsController {
         response.status(204)
         return await theVehiculoConductor.delete()
     }
+
 }

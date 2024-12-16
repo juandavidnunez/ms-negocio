@@ -10,9 +10,6 @@ export default class Dueno extends BaseModel {
   @column()
   public nombre: string
 
-  @column()
-  public email: string
-
   @column.dateTime()
   public fecha_nacimiento: DateTime
 
