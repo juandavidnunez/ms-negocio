@@ -5,5 +5,6 @@ Route.group(() => {
   Route.get('/duenos/:id', 'DuenosController.findById')
   Route.post('/duenos', 'DuenosController.create')
   Route.put('/duenos/:id', 'DuenosController.update')
-  Route.delete('/duenos/:id', 'DuenosController.delete')
+  Route.delete('/duenos/:id', 'DuenosController.delete'),
+  Route.get('/duenos/:id/vehiculos', 'DuenosController.duenosVehiculos')
 }).middleware(["security"])

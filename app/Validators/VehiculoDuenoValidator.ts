@@ -28,7 +28,7 @@ export default class DuenoVehiculoValidator {
       rules.required(),
       rules.exists({table: 'vehiculos', column: 'id'})
     ]),
-      dueño_id: schema.number([
+      dueno_id: schema.number([
       rules.required(),
       rules.exists({table: 'duenos', column: 'id'})
     ])
