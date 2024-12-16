@@ -101,20 +101,20 @@ export default class DuenosController {
     return await theDueno.delete()
   }
 
-public async duenosVehiculos({ params, response, request }: HttpContextContract) {
-  const page = request.input('page', 1); // Página actual
-  const perPage = request.input('perPage', 20); // Número de registros por página
+  public async duenosVehiculos({ params, response, request }: HttpContextContract) {
+    const page = request.input('page', 1); // Página actual
+    const perPage = request.input('perPage', 20); // Número de registros por página
 
-  // Verificar que el vehiculo existe
-  const vehiculo = await Vehiculo.findOrFail(params.id);
+    // Verificar que el vehiculo existe
+    const vehiculo = await Vehiculo.findOrFail(params.id);
 
-  // Paginar los vehículos relacionados
-  const duenos = await vehiculo
-    .related('duenos') // Relación en el modelo
-    .query()
-    .paginate(page, perPage); // Paginación directamente en la relación
+    // Paginar los vehículos relacionados
+    const duenos = await vehiculo
+      .related('duenos') // Relación en el modelo
+      .query()
+      .paginate(page, perPage); // Paginación directamente en la relación
 
-  return response.status(200).json(duenos); // Retorna la respuesta paginada
-}
+    return response.status(200).json(duenos); // Retorna la respuesta paginada
+  }
 
 }

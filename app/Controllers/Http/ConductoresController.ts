@@ -3,6 +3,7 @@ import Conductor from 'App/Models/Conductor';
 import ConductorValidator from 'App/Validators/ConductorValidator'
 import env from '@ioc:Adonis/Core/Env'
 import axios from 'axios';
+import Vehiculo from 'App/Models/Vehiculo';
 export default class ConductorsController {
 
   public async create({ request, response }: HttpContextContract) {
@@ -99,5 +100,21 @@ export default class ConductorsController {
         response.status(204)
         return await theConductor.delete()
     }
+
+      public async conductoresVehiculos({ params, response, request }: HttpContextContract) {
+        const page = request.input('page', 1); // Página actual
+        const perPage = request.input('perPage', 20); // Número de registros por página
+    
+        // Verificar que el vehiculo existe
+        const vehiculo = await Vehiculo.findOrFail(params.id);
+    
+        // Paginar los vehículos relacionados
+        const conductores = await vehiculo
+          .related('conductores') // Relación en el modelo
+          .query()
+          .paginate(page, perPage); // Paginación directamente en la relación
+    
+        return response.status(200).json(conductores); // Retorna la respuesta paginada
+      }
 
 }
