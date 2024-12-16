@@ -54,7 +54,7 @@ export default class Vehiculo extends BaseModel {
   @hasMany(() => Ruta, {
     foreignKey: 'vehiculo_id'
   })
-  public ruta: HasMany<typeof Ruta>
+  public rutas: HasMany<typeof Ruta>
 
   @hasMany(() => Operacion, {
     foreignKey: 'vehiculo_id'

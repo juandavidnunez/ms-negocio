@@ -9,6 +9,7 @@ export default class extends BaseSchema {
 
       table.integer('vehiculo_id').unsigned().references('vehiculos.id')
       table.integer('contrato_id').unsigned().references('contratoes.id')
+      table.boolean('recorrida').defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -15,6 +15,9 @@ export default class Ruta extends BaseModel {
   @column()
   public contrato_id: number
 
+  @column()
+  public recorrida: boolean
+
   @hasMany(() => Lote, {
     foreignKey: 'ruta_id',
   })
