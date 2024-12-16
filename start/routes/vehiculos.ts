@@ -8,4 +8,6 @@ Route.group(() => {
   Route.delete('/vehiculos/:id', 'VehiculosController.delete')
   Route.get('/vehiculos/test', 'VehiculosController.test')
   Route.get('/vehiculos/:id/conductores', 'VehiculosController.vehiculosConductor')
+  Route.get('/vehiculos/:id/duenos', 'VehiculosController.vehiculosDueno')
+  Route.get('/vehiculos/:id/contratos', 'VehiculosController.vehiculosContrato')
 }).middleware(["security"])
