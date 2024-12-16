@@ -66,4 +66,20 @@ export default class RutasController {
         return response.status(200).json(rutas); // Retorna la respuesta paginada
     }
 
+    public async direccionesRuta({ params, response, request }: HttpContextContract) {
+        const page = request.input('page', 1); // Página actual
+        const perPage = request.input('perPage', 20); // Número de registros por página
+
+        // Verificar que la ruta existe
+        const ruta = await Ruta.findOrFail(params.id);
+
+        // Paginar los vehículos relacionados
+        const direcciones = await ruta
+            .related('direcciones')
+            .query()
+            .paginate(page, perPage); // Paginación directamente en la relación
+
+        return response.status(200).json(direcciones); // Retorna la respuesta paginada
+    }
+
 }

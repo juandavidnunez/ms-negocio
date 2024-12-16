@@ -6,6 +6,13 @@ export const direccionValidation = {
       rules.required(),
       rules.maxLength(15)
     ]),
-    municipio_id: schema.number.optional()
+    adicional: schema.string({}, [
+      rules.required(),
+      rules.maxLength(20)
+    ]),
+    municipio_id: schema.number([
+      rules.required(),
+      rules.exists({ table: 'municipios', column: 'id' }) 
+    ])
   })
 }

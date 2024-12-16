@@ -1,9 +1,9 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.get('/direccion', 'DireccionsController.findAll')
-  Route.get('/direccion/:id', 'DireccionsController.findById')
-  Route.post('/direccion', 'DireccionsController.create')
-  Route.put('/direccion/:id', 'DireccionsController.update')
-  Route.delete('/direccion/:id', 'DireccionsController.delete')
+  Route.get('/direcciones', 'DireccionsController.findAll')
+  Route.get('/direcciones/:id', 'DireccionsController.findById')
+  Route.post('/direcciones', 'DireccionsController.create')
+  Route.put('/direcciones/:id', 'DireccionsController.update')
+  Route.delete('/direcciones/:id', 'DireccionsController.delete')
 }).middleware(["security"])
