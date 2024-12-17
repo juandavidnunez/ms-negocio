@@ -7,6 +7,7 @@ import axios from 'axios';
 export default class PersonasNaturalesController {
 
   public async create({ request, response }: HttpContextContract) {
+    console.log('Creando Persona Natural');
     try {
       let body = request.only(['name', 'email', 'password']);
       const token = request.header('Authorization');
