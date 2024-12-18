@@ -75,7 +75,6 @@ export default class LotesController {
         // Verificar que el dueno existe
         const dir_listar_orden = await DirListaOrden.findOrFail(params.id);
       
-        // Paginar los vehículos relacionados
         const lotes = await  dir_listar_orden
           .related('lote')
           .query()
