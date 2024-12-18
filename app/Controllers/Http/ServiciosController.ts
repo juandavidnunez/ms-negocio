@@ -1,4 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Hotel from 'App/Models/Hotel';
+import Restaurante from 'App/Models/Restaurante';
 import Servicio from 'App/Models/Servicio'
 import { servicioValidation } from 'App/Validators/ServicioValidator';
 
@@ -42,4 +44,33 @@ public async update({ params, request }: HttpContextContract) {
     response.status(204)
     return await theServicio.delete()
 }
+ public async serviciosHoteles({ params, response, request }: HttpContextContract) {
+        const page = request.input('page', 1); // Página actual
+        const perPage = request.input('perPage', 20); // Número de registros por página
+      
+        // Verificar que el hotel existe
+        const hotel = await Hotel.findOrFail(params.id);
+      
+        const servicio = await hotel
+          .related('servicio')
+          .query()
+          .paginate(page, perPage); // Paginación directamente en la relación
+      
+        return response.status(200).json(servicio); // Retorna la respuesta paginada
+    }
+
+    public async serviciosRestaurantes({ params, response, request }: HttpContextContract) {
+        const page = request.input('page', 1); // Página actual
+        const perPage = request.input('perPage', 20); // Número de registros por página
+      
+        // Verificar que el  existe
+        const restaurante = await Restaurante.findOrFail(params.id);
+      
+        const servicio = await  restaurante
+          .related('servicio')
+          .query()
+          .paginate(page, perPage); // Paginación directamente en la relación
+      
+        return response.status(200).json(servicio); // Retorna la respuesta paginada
+    }
 }
