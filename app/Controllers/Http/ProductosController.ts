@@ -14,11 +14,13 @@ export default class ProductosController {
     public async findAll({ request }: HttpContextContract) {
         const data = request.all();
         if ("page" in data && "per_page" in data) {
+            const page = request.input('page', data.page);
+            const perPage = request.input('perPage', data.per_page);
+            return await Producto.query().paginate(page, perPage);
+        } else {
             const page = request.input('page', 1);
             const perPage = request.input('perPage', 20);
             return await Producto.query().paginate(page, perPage);
-        } else {
-            return await Producto.query();
         }
     }
 

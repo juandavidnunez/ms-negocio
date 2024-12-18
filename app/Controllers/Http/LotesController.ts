@@ -5,10 +5,14 @@ import Producto from 'App/Models/Producto';
 import Ruta from 'App/Models/Ruta';
 import Ws from 'App/Services/Ws';
 import { loteValidation } from 'App/Validators/LoteValidator';
+import { DateTime } from 'luxon';
 
 export default class LotesController {
     public async create({ request }: HttpContextContract) {
         const body = await request.validate(loteValidation);
+        if (body.fecha_creacion == null) {
+            body.fecha_creacion = DateTime.now().startOf('day'); // Crea un objeto DateTime
+        }
         const theLote = await Lote.create(body)
         return theLote
     }
