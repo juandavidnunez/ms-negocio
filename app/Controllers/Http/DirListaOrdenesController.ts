@@ -39,4 +39,13 @@ export default class DirListaOrdenesController {
         response.status(204)
         return await theDirListaOrden.delete()
     }
+
+      public async deleteAllRuta({ params, response }: HttpContextContract) {
+                const vehiculoConductores = await DirListaOrden.query().where('ruta_id', params.id);
+                if (vehiculoConductores.length === 0) {
+                    return response.status(404).send({ message: 'No se encontraron registros para eliminar.' });
+                }
+                return await DirListaOrden.query().where('ruta_id', params.id).delete();
+                
+            }
 }

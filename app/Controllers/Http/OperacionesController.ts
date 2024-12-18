@@ -48,4 +48,14 @@ export default class OperacionesController {
         response.status(204);
         return await theOperacion.delete();
     }
+
+      public async deleteAllVehiculo({ params, response }: HttpContextContract) {
+                const vehiculoConductores = await Operacion.query().where('vehiculo_id', params.id);
+                // Verificar si se encontraron registros
+                if (vehiculoConductores.length === 0) {
+                    return response.status(404).send({ message: 'No se encontraron registros para eliminar.' });
+                }
+                return await Operacion.query().where('vehiculo_id', params.id).delete();
+                
+            }
 }

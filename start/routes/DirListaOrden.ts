@@ -6,4 +6,6 @@ Route.group(() => {
   Route.post('/dirListaOrdenes', 'DirListaOrdenesController.create')
   Route.put('/dirListaOrdenes/:id', 'DirListaOrdenesController.update')
   Route.delete('/dirListaOrdenes/:id', 'DirListaOrdenesController.delete')
+  Route.delete('/dirListaOrdenes/ruta/:id', 'DirListaOrdenesController.deleteAllRuta')
+
 }).middleware(["security"])
