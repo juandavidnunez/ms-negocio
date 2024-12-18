@@ -1,4 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Cliente from 'App/Models/Cliente';
+import Lote from 'App/Models/Lote';
 import Producto from 'App/Models/Producto';
 import { productoValidation } from 'App/Validators/ProductoValidator';
 
@@ -54,4 +56,35 @@ export default class ProductosController {
         response.status(204);
         return await theProducto.delete();
     }
+
+      public async productosLote({ params, response, request }: HttpContextContract) {
+            const page = request.input('page', 1); // Página actual
+            const perPage = request.input('perPage', 20); // Número de registros por página
+          
+            // Verificar que el lote existe
+            const lote = await Lote.findOrFail(params.id);
+          
+            const lotes = await lote
+              .related('productos')
+              .query()
+              .paginate(page, perPage); // Paginación directamente en la relación
+          
+            return response.status(200).json(lotes); // Retorna la respuesta paginada
+        }
+    
+        public async productosCliente({ params, response, request }: HttpContextContract) {
+            const page = request.input('page', 1); // Página actual
+            const perPage = request.input('perPage', 20); // Número de registros por página
+          
+            const cliente = await Cliente.findOrFail(params.id);
+          
+            // Paginar los vehículos relacionados
+            const lotes = await  cliente
+              .related('producto')
+              .query()
+              .paginate(page, perPage); // Paginación directamente en la relación
+          
+            return response.status(200).json(lotes); // Retorna la respuesta paginada
+        }
+    
 }
