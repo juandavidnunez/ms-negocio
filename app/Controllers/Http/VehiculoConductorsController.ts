@@ -9,7 +9,7 @@ export default class VehiculoConductorsController {
         const theVehiculoConductor = await VehiculoConductor.create(body)
         return theVehiculoConductor
     }
-    
+
     public async findAll({ request }: HttpContextContract) {
         const page = request.input('page', 1)
         const perPage = request.input('perPage', 20)
@@ -22,8 +22,8 @@ export default class VehiculoConductorsController {
         const theVehiculoConductor = await VehiculoConductor.findOrFail(params.id)
         return theVehiculoConductor
     }
-    
-    
+
+
     public async update({ params, request }: HttpContextContract) {
         // Validar el cuerpo de la solicitud
         const body = await request.validate(VehiculoConductorValidator);
@@ -31,15 +31,25 @@ export default class VehiculoConductorsController {
         const theVehiculoConductor = await VehiculoConductor.findOrFail(params.id);
         // Actualizar las propiedades de theVehiculoConductor con los valores del cuerpo
         Object.assign(theVehiculoConductor, body);
-        
+
         await theVehiculoConductor.save();
         return theVehiculoConductor;
     }
-    
-      public async delete({ params, response }: HttpContextContract) {
+
+    public async delete({ params, response }: HttpContextContract) {
         const theVehiculoConductor = await VehiculoConductor.findOrFail(params.id)
         response.status(204)
         return await theVehiculoConductor.delete()
+    }
+
+    public async deleteAllVehiculo({ params, response }: HttpContextContract) {
+        const vehiculoConductores = await VehiculoConductor.query().where('vehiculo_id', params.id);
+        // Verificar si se encontraron registros
+        if (vehiculoConductores.length === 0) {
+            return response.status(404).send({ message: 'No se encontraron registros para eliminar.' });
+        }
+        return await VehiculoConductor.query().where('vehiculo_id', params.id).delete();
+        
     }
 
 }
